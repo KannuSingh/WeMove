@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.onboarding.RegistrationFragment">
+            <TextView
+                android:id="@+id/tv_reg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="@string/sign_up"
+                android:textAllCaps="true"
+                android:textColor="@color/text"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/loginImage1"
+                android:layout_width="300dp"
+                android:layout_height="200dp"
+                android:layout_below="@+id/tv_reg"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/register2"
+                android:contentDescription="@string/registration_image_desc">
+
+            </ImageView>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfl_firstname"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/loginImage1"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/firstname"
+                android:textColorHint="@color/text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_firstname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfl_lastname"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tfl_firstname"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/lastname"
+                android:textColorHint="@color/text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_lastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_email"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tfl_lastname"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/email"
+                android:textColorHint="@color/text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textEmailAddress">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_mobile"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tf_email"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/mobile"
+                android:textColorHint="@color/text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_city"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tf_mobile"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/city"
+                android:textColorHint="@color/text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tf_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tf_city"
+                android:layout_marginHorizontal="60dp"
+                android:layout_marginBottom="10dp"
+                android:hint="@string/password"
+                android:textColorHint="@color/text">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/et_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="textPassword">
+
+                </com.google.android.material.textfield.TextInputEditText>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_user_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tf_password"
+                android:layout_marginHorizontal="60dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_customer"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="@string/customer"
+                    android:textColor="@color/text">
+
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/rb_service_provider"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mover"
+                    android:textColor="@color/text">
+
+                </RadioButton>
+
+            </RadioGroup>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/button_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rg_user_type"
+                android:layout_centerInParent="true"
+                android:backgroundTint="@color/button_primary"
+                android:text="@string/sign_up"
+                android:textSize="18sp"/>
+
+            <Button
+                android:id="@+id/button_login"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/button_register"
+                android:layout_centerInParent="true"
+                android:text="@string/already_have_an_account_sign_in"
+                android:textColor="@color/highlight_background"
+                android:textSize="14sp"/>
+        </RelativeLayout>
+
+</layout>

@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">WeMove</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="don_t_have_an_account_sign_up">Don\'t have an Account? Sign Up!</string>
+
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login_image_desc">LoginImage</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="lastname">Lastname</string>
+    <string name="firstname">Firstname</string>
+    <string name="mobile">Mobile</string>
+    <string name="city">City</string>
+    <string name="customer">Customer</string>
+    <string name="mover">Mover</string>
+    <string name="already_have_an_account_sign_in">Already have an Account? Sign In!</string>
+    <string name="registration_image_desc">Registration Image Description</string>
+    <string name="wemove">WeMove</string>
+
+</resources>
