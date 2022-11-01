@@ -19,5 +19,12 @@
     <string name="already_have_an_account_sign_in">Already have an Account? Sign In!</string>
     <string name="registration_image_desc">Registration Image Description</string>
     <string name="wemove">WeMove</string>
+    <string name="security_answer">Security Answer</string>
+    <string name="security_question">Security Question</string>
+    <string name="proceed">proceed</string>
+    <string name="cancel">cancel</string>
+    <string name="password_recovery">Password Recovery</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
 
 </resources>

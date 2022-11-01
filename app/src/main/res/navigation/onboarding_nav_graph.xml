@@ -8,15 +8,19 @@
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.wemove.ui.onboarding.LoginFragment"
-        android:label="LoginFragment" >
+        android:label="Login" >
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
-            app:destination="@id/registrationFragment" />
+            app:destination="@id/registrationFragment"
+            app:popUpTo="@id/loginFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
         android:name="com.wemove.ui.onboarding.RegistrationFragment"
-        android:label="RegistrationFragment" >
+        android:label="Registration" >
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
@@ -24,9 +28,41 @@
     <fragment
         android:id="@+id/splashScreenFragment"
         android:name="com.wemove.ui.onboarding.SplashScreenFragment"
-        android:label="SplashScreenFragment" >
+        android:label="WeMove" >
         <action
             android:id="@+id/action_splashScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.wemove.ui.onboarding.ChangePasswordFragment"
+        android:label="ChangePassword" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.wemove.ui.onboarding.ForgotPasswordFragment"
+        android:label="ForgotPassword" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_securityQuestionFragment"
+            app:destination="@id/securityQuestionFragment" />
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/securityQuestionFragment"
+        android:name="com.wemove.ui.onboarding.SecurityQuestionFragment"
+        android:label="SecurityQuestion" >
+        <action
+            android:id="@+id/action_securityQuestionFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_securityQuestionFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment" />
     </fragment>
 </navigation>

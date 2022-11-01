@@ -3,21 +3,23 @@ package com.wemove.ui.onboarding;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.navigation.NavController;
-import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.wemove.R;
+import com.wemove.viewmodel.ForgotPasswordViewModel;
+import com.wemove.viewmodel.RegistrationViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SplashScreenFragment#newInstance} factory method to
+ * Use the {@link ForgotPasswordFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SplashScreenFragment extends Fragment {
+public class ForgotPasswordFragment extends Fragment {
+
+   // private ForgotPasswordViewModel forgotPasswordViewModel;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -28,7 +30,7 @@ public class SplashScreenFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public SplashScreenFragment() {
+    public ForgotPasswordFragment() {
         // Required empty public constructor
     }
 
@@ -38,11 +40,11 @@ public class SplashScreenFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SplashScreenFragment.
+     * @return A new instance of fragment ForgotPasswordFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SplashScreenFragment newInstance(String param1, String param2) {
-        SplashScreenFragment fragment = new SplashScreenFragment();
+    public static ForgotPasswordFragment newInstance(String param1, String param2) {
+        ForgotPasswordFragment fragment = new ForgotPasswordFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -63,11 +65,6 @@ public class SplashScreenFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_splash_screen, container, false);
-       // NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.view_onboarding_container);
-        NavHostFragment navHostFragment = (NavHostFragment) requireActivity().getSupportFragmentManager().findFragmentById(R.id.view_onboarding_container);
-        NavController navController = navHostFragment.getNavController();
-        navController.navigate(R.id.action_splashScreenFragment_to_loginFragment);
-        return view;
+        return inflater.inflate(R.layout.fragment_forgot_password, container, false);
     }
 }
