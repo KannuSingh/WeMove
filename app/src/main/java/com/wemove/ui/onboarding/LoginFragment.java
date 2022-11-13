@@ -1,5 +1,7 @@
 package com.wemove.ui.onboarding;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -18,14 +20,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.wemove.R;
 import com.wemove.databinding.FragmentLoginBinding;
+import com.wemove.model.UserDetails;
+import com.wemove.model.UserType;
 import com.wemove.viewmodel.LoginViewModel;
+
+import java.util.Map;
 
 
 public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
     private LoginViewModel  loginViewModel;
+
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor sharedEditor;
 
 
     public LoginFragment() {
@@ -38,23 +48,42 @@ public class LoginFragment extends Fragment {
         super.onCreate(savedInstanceState);
         loginViewModel  = new ViewModelProvider(this).get(LoginViewModel.class);
 
-        final Observer<Boolean> loginObserver = new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable final Boolean loginFlag) {
+        final Observer<Boolean> loginObserver = loginFlag -> {
                 // Update the UI, in this case, a TextView.
 
                 if (Boolean.TRUE.equals(loginFlag)) {
-                    Toast.makeText(getContext(),"Login Successfully",Toast.LENGTH_LONG).show();
-                    Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_registrationFragment);
+                    Toast.makeText(getContext(),"Login Successfully",Toast.LENGTH_SHORT).show();
+
                 }else if(Boolean.FALSE.equals(loginFlag)) {
                     setErrorTextField(true);
-                    Toast.makeText(getContext(),"Login Failed",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Login Failed",Toast.LENGTH_SHORT).show();
                 }
                 Log.i("LoginFragment","Navigate to Dashboard");
+            };
+
+
+        final Observer<UserDetails> loginUserObserver = new Observer<UserDetails>() {
+            @Override
+            public void onChanged(@Nullable final UserDetails userDetails) {
+                // Update the UI, in this case, a TextView.
+
+                if (userDetails!=null && userDetails.getUserType().equals(UserType.CUSTOMER)) {
+                    String email = binding.etEmail.getText().toString();
+                    String password = binding.etPassword.getText().toString();
+                    setLoggedInUserDetails(userDetails,email,password);
+                    Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_customerDashboardActivity);
+
+                }else if(userDetails!=null && userDetails.getUserType().equals(UserType.MOVER)) {
+                    Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_moverDashboardActivity);
+
+                }
+                Log.i("LoginFragment","Invalid User Credentials");
             }
         };
 
         loginViewModel.isLoginFlag().observe(this.getActivity(),loginObserver);
+
+        loginViewModel.getLoginUserDetails().observe(this.getActivity(),loginUserObserver);
     }
 
     @Override
@@ -90,6 +119,7 @@ public class LoginFragment extends Fragment {
         String email = binding.etEmail.getText().toString();
         String password = binding.etPassword.getText().toString();
         loginViewModel.login(email,password);
+
     }
 
     private void setErrorTextField(boolean error) {
@@ -105,6 +135,18 @@ public class LoginFragment extends Fragment {
             binding.tflPassword.setErrorEnabled(false);
             binding.tflPassword.setError(null);
         }
+    }
+
+    private void setLoggedInUserDetails(UserDetails userDetails,String email, String password) {
+        sharedPreferences = getContext().getSharedPreferences("wemove", Context.MODE_PRIVATE);
+        sharedEditor = sharedPreferences.edit();
+        Gson gson = new Gson();
+        String userDetailsString = gson.toJson(userDetails);
+        sharedEditor.putString("email",email);
+        sharedEditor.putString("password",password);
+        sharedEditor.putString("userDetails", userDetailsString);
+        sharedEditor.commit();
+        sharedEditor.apply();
     }
 
     @Override

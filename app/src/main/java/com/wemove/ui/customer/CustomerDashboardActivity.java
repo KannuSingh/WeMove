@@ -1,16 +1,63 @@
 package com.wemove.ui.customer;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.wemove.R;
+import com.wemove.databinding.ActivityCustomerDashboardBinding;
+import com.wemove.viewmodel.CustomerViewModel;
+import com.wemove.viewmodel.MoveRequestFormViewModel;
 
 public class CustomerDashboardActivity extends AppCompatActivity {
+
+    private ActivityCustomerDashboardBinding binding;
+    private CustomerViewModel customerViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_customer_dashboard);
+
+        binding = ActivityCustomerDashboardBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.customer_fragments_view_container);
+        NavController navController = navHostFragment.getNavController();
+
+        NavigationUI.setupActionBarWithNavController(this,navHostFragment.getNavController());
+
+        BottomNavigationView bnv = binding.customerBottomNavigationView;
+        NavigationUI.setupWithNavController(bnv,navController);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this,R.color.button_primary)));
+
+        customerViewModel = new ViewModelProvider(this).get(CustomerViewModel.class);
+        setLoggedInUser();
+
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(false);
+    }
+
+    private void setLoggedInUser() {
+        SharedPreferences sharedPreferences = this.getSharedPreferences("wemove", Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString("email", null);
+        String password = sharedPreferences.getString("password", null);
+        String userDetails = sharedPreferences.getString("userDetails", null);
+
+
+        customerViewModel.setUser(email,password,userDetails);
     }
 }

@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="main_background">#FFFFFFFF</color>
     <color name="button_primary">#FAA61A</color>
-    <color name="shadow_background">#F7F8FC</color>
+    <color name="shadow_background">#F4F8FC</color>
     <color name="highlight_background">#0C3469</color>
     <color name="text">#0C3469</color>
     <color name="splash_background">#F7941D</color>

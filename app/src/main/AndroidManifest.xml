@@ -14,14 +14,14 @@
         android:theme="@style/Theme.WeMove"
         tools:targetApi="31">
         <activity
-            android:name=".MoverDashboardActivity"
+            android:name=".ui.mover.MoverDashboardActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".CustomerDashboardActivity"
+            android:name=".ui.customer.CustomerDashboardActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

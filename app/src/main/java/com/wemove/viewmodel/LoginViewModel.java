@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.wemove.model.UserCredentials;
+import com.wemove.model.UserDetails;
 import com.wemove.network.RetrofitClientInstance;
 import com.wemove.service.IUserOnboardingService;
 
@@ -16,10 +17,13 @@ import retrofit2.Response;
 
 public class LoginViewModel extends ViewModel {
     private static final String TAG= "LoginViewModel";
+
+    private MutableLiveData<UserDetails>  _loginUserDetails = new MutableLiveData<UserDetails>();
+    private MutableLiveData<UserDetails>  loginUserDetails;
+    public LiveData<UserDetails> getLoginUserDetails(){ return _loginUserDetails;}
+
     private MutableLiveData<Boolean>  _loginFlag = new MutableLiveData<Boolean>();
     private LiveData<Boolean> loginFlag;
-
-
     public LiveData<Boolean> isLoginFlag() {
         return _loginFlag;
     }
@@ -35,16 +39,25 @@ public class LoginViewModel extends ViewModel {
        UserCredentials userCredentials = new UserCredentials();
        userCredentials.setEmail(email);
        userCredentials.setPassword(password);
-       onboardingService.login(userCredentials).enqueue(new Callback<Boolean>() {
+       onboardingService.login(userCredentials).enqueue(new Callback<UserDetails>() {
 
            @Override
-           public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-               Log.i("LOGIN Response :", response.body().toString());
-               _loginFlag.setValue(true);
+           public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
+               if(response.isSuccessful()){
+                   Log.i("LOGIN Response :", ""+response.body());
+                   _loginUserDetails.setValue(response.body());
+                   _loginFlag.setValue(true);
+                   //_loginUserDetails()
+               }
+               else{
+                   _loginFlag.setValue(false);
+               }
+
+              // _loginFlag.setValue(true);
            }
 
            @Override
-           public void onFailure(Call<Boolean> call, Throwable t) {
+           public void onFailure(Call<UserDetails> call, Throwable t) {
                Log.i("LOGIN Failure :",t.toString() );
                _loginFlag.setValue(false);
            }
@@ -55,6 +68,8 @@ public class LoginViewModel extends ViewModel {
         }*/
 
     }
+
+
 
     @Override
     protected void onCleared() {

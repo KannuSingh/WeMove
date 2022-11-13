@@ -16,6 +16,12 @@
         <action
             android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_customerDashboardActivity"
+            app:destination="@id/customerDashboardActivity" />
+        <action
+            android:id="@+id/action_loginFragment_to_moverDashboardActivity"
+            app:destination="@id/moverDashboardActivity" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -65,4 +71,12 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/loginFragment" />
     </fragment>
+    <activity
+        android:id="@+id/customerDashboardActivity"
+        android:name="com.wemove.ui.customer.CustomerDashboardActivity"
+        android:label="CustomerDashboardActivity" />
+    <activity
+        android:id="@+id/moverDashboardActivity"
+        android:name="com.wemove.ui.mover.MoverDashboardActivity"
+        android:label="MoverDashboardActivity" />
 </navigation>

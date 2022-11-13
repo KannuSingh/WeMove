@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.common.InventoryItemDetailFragment">
+
+
+
+        <TextView
+            android:id="@+id/tv_move_request_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:text="@string/item_details"
+            android:textColor="@color/text"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/item_category"
+                    android:textColor="@color/text"
+                    android:textSize="14sp" />
+
+                <Spinner
+                    android:id="@+id/item_category"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@drawable/gradient_spinner"
+                    android:minHeight="48dp"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/tv_item_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/items"
+                    android:visibility="gone"
+                    android:textColor="@color/text"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:id="@+id/bedroom_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <CheckBox
+                            android:id="@+id/bedroom_bench"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bedroom_bench"/>
+                        <CheckBox
+                            android:id="@+id/bedroom_table"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bedroom_table"/>
+                        <CheckBox
+                            android:id="@+id/double_bed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/double_bed"/>
+                        <CheckBox
+                            android:id="@+id/double_bed_mattress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/double_bed_mattress"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <CheckBox
+                            android:id="@+id/wardrobe"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wardrobe"/>
+                        <CheckBox
+                            android:id="@+id/single_bed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/single_bed"/>
+                        <CheckBox
+                            android:id="@+id/single_bed_mattress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/single_bed_mattress"/>
+                        <CheckBox
+                            android:id="@+id/night_lamp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/night_lamp"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/living_room_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <CheckBox
+                            android:id="@+id/arm_chair"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/arm_chair"/>
+                        <CheckBox
+                            android:id="@+id/cardboard_box"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/cardboard_box"/>
+                        <CheckBox
+                            android:id="@+id/coffee_side_table"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/coffee_side_table"/>
+                        <CheckBox
+                            android:id="@+id/dining_table"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dining_table"/>
+                        <CheckBox
+                            android:id="@+id/dining_chair"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dining_chair"/>
+
+                        <CheckBox
+                            android:id="@+id/rug"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rug"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <CheckBox
+                            android:id="@+id/sofa_2_seat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sofa_2_seat"/>
+                        <CheckBox
+                            android:id="@+id/sofa_3_seat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sofa_3_seat"/>
+
+                        <CheckBox
+                            android:id="@+id/sofa_4_seat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sofa_4_seat"/>
+                        <CheckBox
+                            android:id="@+id/sofa_l_shaped_corner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sofa_l_shaped_corner"/>
+                        <CheckBox
+                            android:id="@+id/tv"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv"/>
+                        <CheckBox
+                            android:id="@+id/tv_stand"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tv_stand"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/kitchen_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+
+                        <CheckBox
+                            android:id="@+id/dishwasher"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dishwasher"/>
+                        <CheckBox
+                            android:id="@+id/extractor_fan"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/extractor_fan"/>
+                        <CheckBox
+                            android:id="@+id/fridge_freezer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fridge_freezer"/>
+                        <CheckBox
+                            android:id="@+id/kitchen_chair"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kitchen_chair"/>
+                        <CheckBox
+                            android:id="@+id/kitchen_Table"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/kitchen_table"/>
+
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <CheckBox
+                            android:id="@+id/microwave"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/microwave"/>
+                        <CheckBox
+                            android:id="@+id/oven"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/oven"/>
+
+                        <CheckBox
+                            android:id="@+id/tumble_dryer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/tumble_dryer"/>
+                        <CheckBox
+                            android:id="@+id/washing_machine"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/washing_machine"/>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/bathroom_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                        <CheckBox
+                            android:id="@+id/bathroom_cabinet"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bathroom_cabinet"/>
+                        <CheckBox
+                            android:id="@+id/mirror"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/mirror"/>
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/outdoor_items"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+
+
+                        <CheckBox
+                            android:id="@+id/garden_bench"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/garden_bench"/>
+                        <CheckBox
+                            android:id="@+id/garden_chair"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/garden_chair"/>
+                        <CheckBox
+                            android:id="@+id/garden_corner_sofa"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/garden_corner_sofa"/>
+                        <CheckBox
+                            android:id="@+id/garden_table"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/garden_table"/>
+                        <CheckBox
+                            android:id="@+id/parasol"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/parasol"/>
+
+
+
+
+                </LinearLayout>
+
+                <Button
+                    android:id="@+id/item_details_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="10dp"
+                    android:backgroundTint="@color/button_primary"
+                    android:text="Add"/>
+
+
+            </LinearLayout>
+
+</LinearLayout>
+</layout>

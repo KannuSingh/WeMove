@@ -1,6 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/customer_nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customer_nav_graph"
+    app:startDestination="@id/myMoveRequestsFragment">
 
+    <fragment
+        android:id="@+id/myMoveRequestsFragment"
+        android:name="com.wemove.ui.customer.MyMoveRequestsFragment"
+        android:label="Active Move Requests"
+        tools:layout="@layout/fragment_my_move_requests" >
+        <action
+            android:id="@+id/action_myMoveRequestsFragment_to_moveRequestFormFragment"
+            app:destination="@id/moveRequestFormFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/moveRequestHistoryFragment"
+        android:name="com.wemove.ui.customer.MoveRequestHistoryFragment"
+        android:label="Move Request History"
+        tools:layout="@layout/fragment_move_request_history" />
+    <fragment
+        android:id="@+id/customerProfileFragment"
+        android:name="com.wemove.ui.customer.CustomerProfileFragment"
+        android:label="Profile Details"
+        tools:layout="@layout/fragment_customer_profile" />
+    <fragment
+        android:id="@+id/moveRequestFormFragment"
+        android:name="com.wemove.ui.customer.MoveRequestFormFragment"
+        android:label="Move Request Form"
+        tools:layout="@layout/fragment_move_request_form" >
+        <action
+            android:id="@+id/action_moveRequestFormFragment_to_pickupAndDeliveryFragment"
+            app:destination="@id/pickupAndDeliveryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pickupAndDeliveryFragment"
+        android:name="com.wemove.ui.common.PickupAndDeliveryFragment"
+        android:label="Pickup And Delivery Details"
+        tools:layout="@layout/fragment_pickup_and_delivery" >
+        <action
+            android:id="@+id/action_pickupAndDeliveryFragment_to_homeInventoryFragment"
+            app:destination="@id/homeInventoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeInventoryFragment"
+        android:name="com.wemove.ui.common.HomeInventoryFragment"
+        android:label="Inventory"
+        tools:layout="@layout/fragment_home_inventory" >
+        <action
+            android:id="@+id/action_homeInventoryFragment_to_inventoryItemDetailFragment"
+            app:destination="@id/inventoryItemDetailFragment" />
+        <action
+            android:id="@+id/action_homeInventoryFragment_to_myMoveRequestsFragment"
+            app:destination="@id/myMoveRequestsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/inventoryItemDetailFragment"
+        android:name="com.wemove.ui.common.InventoryItemDetailFragment"
+        android:label="Inventory Item Details"
+        tools:layout="@layout/fragment_inventory_item_detail" >
+        <action
+            android:id="@+id/action_inventoryItemDetailFragment_to_homeInventoryFragment"
+            app:destination="@id/homeInventoryFragment" />
+    </fragment>
 </navigation>

@@ -13,7 +13,7 @@ import retrofit2.http.Query;
 public interface  IUserOnboardingService{
 
     @POST("/userLogin")
-    Call<Boolean> login(@Body UserCredentials userCredentials);
+    Call<UserDetails> login(@Body UserCredentials userCredentials);
 
     @POST("/register")
     Call<UserDetails> register(@Body UserDetails userDetails);

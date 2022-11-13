@@ -126,8 +126,7 @@ public class UserDetails {
                 ", dateOfBirth='" + dateOfBirth + '\'' +
                 ", address=" + address +
                 ", mobile='" + mobile + '\'' +
-                ", securityQuestion='" + securityQuestion + '\'' +
-                ", securityAnswer='" + securityAnswer + '\'' +
+                ", userType=" + userType +
                 '}';
     }
 }

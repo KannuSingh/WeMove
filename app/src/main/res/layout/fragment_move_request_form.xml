@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.customer.MoveRequestFormFragment">
+
+
+        <TextView
+            android:id="@+id/tv_move_request_form"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/move_request_1_3"
+            android:textColor="@color/text"
+            android:textSize="18sp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_move_request_form">
+        <LinearLayout
+            android:id="@+id/move_request_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:paddingHorizontal="20dp"
+            android:orientation="vertical">
+
+
+
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/title"
+                    android:textColor="@color/text"
+                    android:textSize="14sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tfl_move_request_title"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginVertical="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:hint="@string/title"
+                    android:textColorHint="@color/text">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_move_request_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="text"
+                        tools:ignore="DuplicateSpeakableTextCheck">
+
+                    </com.google.android.material.textfield.TextInputEditText>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_move_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/move_type"
+                    android:textColor="@color/text"
+                    android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/move_type"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/gradient_spinner"
+                android:contentDescription="@string/move_type"
+                android:minHeight="48dp"
+                android:textSize="20sp"
+                tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <TextView
+                    android:id="@+id/tv_moving_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/moving_date"
+                    android:textColor="@color/text"
+                    android:textSize="14sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tfl_move_date"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
+                        android:enabled="false"
+                        android:hint="@string/date"
+                        android:textColorHint="@color/text">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_move_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:inputType="date">
+
+                        </com.google.android.material.textfield.TextInputEditText>
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/select_move_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="2dp"
+                        android:backgroundTint="@color/button_primary"
+                        android:text="@string/select"
+                        android:textColor="#5D4037" />
+                </LinearLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_moving_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/help_required"
+                    android:textColor="@color/text"
+                    android:textSize="14sp" />
+
+                <RadioGroup
+                    android:id="@+id/rg_moving_help"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rb_no_help"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="3dp"
+                        android:checked="true"
+                        android:text="@string/no_help_needed_ndriver_will_drive_only_driver_will_not_load_or_unload_your_items"
+                        android:textColor="@color/text">
+
+                    </RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/rb_driver_help"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="3dp"
+                        android:text="@string/driver_helping_ndriver_will_load_and_unload_your_items"
+                        android:textColor="@color/text">
+
+                    </RadioButton>
+
+
+                    <RadioButton
+                        android:id="@+id/rb_driver_plus_one_helper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="3dp"
+                        android:text="@string/driver_helping_1_helper_ndriver_with_one_other_helper_will_load_and_unload_your_items"
+                        android:textColor="@color/text">
+
+                    </RadioButton>
+
+                    <RadioButton
+                        android:id="@+id/rb_driver_plus_two_helper"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="3dp"
+                        android:text="@string/driver_helping_2_helper_ndriver_with_two_other_helpers_will_load_and_unload_your_items"
+                        android:textColor="@color/text">
+
+                    </RadioButton>
+
+                </RadioGroup>
+            <Button
+                android:id="@+id/move_request_form_one_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="15dp"
+                android:layout_marginTop="-600dp"
+                android:backgroundTint="@color/button_primary"
+                android:text="@string/next"
+                android:textColor="#5D4037" />
+
+            </LinearLayout>
+        </ScrollView>
+
+
+
+    </RelativeLayout>
+
+</layout>

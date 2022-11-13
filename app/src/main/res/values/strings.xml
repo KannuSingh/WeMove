@@ -21,10 +21,116 @@
     <string name="wemove">WeMove</string>
     <string name="security_answer">Security Answer</string>
     <string name="security_question">Security Question</string>
-    <string name="proceed">proceed</string>
-    <string name="cancel">cancel</string>
+    <string name="proceed">Proceed</string>
+    <string name="cancel">Cancel</string>
     <string name="password_recovery">Password Recovery</string>
     <string name="new_password">New Password</string>
     <string name="confirm_password">Confirm Password</string>
+    <string name="item_details">Item Details</string>
+    <string name="item_category">Item Category</string>
+    <string name="items">Items</string>
+    <string name="bedroom_bench">Bedroom Bench</string>
+    <string name="bedroom_table">Bedroom Table</string>
+    <string name="double_bed">Double bed</string>
+    <string name="double_bed_mattress">Double bed mattress</string>
+    <string name="wardrobe">Wardrobe</string>
+    <string name="single_bed">Single bed</string>
+    <string name="single_bed_mattress">Single bed mattress</string>
+    <string name="night_lamp">Night lamp</string>
+    <string name="arm_chair">Arm Chair</string>
+    <string name="cardboard_box">Cardboard Box</string>
+    <string name="coffee_side_table">Coffee/Side Table</string>
+    <string name="dining_table">Dining Table</string>
+    <string name="dining_chair">Dining chair</string>
+    <string name="rug">Rug</string>
+    <string name="sofa_2_seat">Sofa 2-seat</string>
+    <string name="sofa_3_seat">Sofa 3-seat</string>
+    <string name="sofa_4_seat">Sofa 4-seat</string>
+    <string name="sofa_l_shaped_corner">Sofa L-shaped corner</string>
+    <string name="tv">TV</string>
+    <string name="tv_stand">TV stand</string>
+    <string name="dishwasher">Dishwasher</string>
+    <string name="extractor_fan">Extractor Fan</string>
+    <string name="fridge_freezer">Fridge Freezer</string>
+    <string name="kitchen_chair">Kitchen chair</string>
+    <string name="kitchen_table">Kitchen table</string>
+    <string name="microwave">Microwave</string>
+    <string name="oven">oven</string>
+    <string name="tumble_dryer">Tumble Dryer</string>
+    <string name="washing_machine">Washing machine</string>
+    <string name="bathroom_cabinet">Bathroom Cabinet</string>
+    <string name="mirror">Mirror</string>
+    <string name="garden_bench">Garden bench</string>
+    <string name="garden_chair">Garden chair</string>
+    <string name="garden_corner_sofa">Garden corner sofa</string>
+    <string name="garden_table">Garden table</string>
+    <string name="parasol">Parasol</string>
+    <string name="other_details">Other Details</string>
+    <string name="title">Title</string>
+    <string name="move_type">Move Type</string>
+    <string name="moving_date">Moving Date</string>
+    <string name="help_required">Help Required</string>
+    <string name="no_help_needed_ndriver_will_drive_only_driver_will_not_load_or_unload_your_items">No help needed \nDriver will drive only, driver will not load or unload your items</string>
+    <string name="driver_helping_ndriver_will_load_and_unload_your_items">Driver Helping \nDriver will load and unload your items</string>
+    <string name="driver_helping_1_helper_ndriver_with_one_other_helper_will_load_and_unload_your_items">Driver helping + 1 helper \nDriver with one other helper will load and unload your items</string>
+    <string name="driver_helping_2_helper_ndriver_with_two_other_helpers_will_load_and_unload_your_items">Driver helping + 2 helper \nDriver with two other helpers will load and unload your items</string>
+    <string name="move_request_1_3">Move Request (1/3)</string>
+    <string name="date">Date</string>
+    <string name="select">select</string>
+    <string name="next">Next</string>
+    <string name="move_title">Move Title</string>
+    <string name="source_address">Source Address</string>
+    <string name="destination_address">Destination Address</string>
+    <string name="move_request_date">Move Request Date</string>
+    <string name="move_request_2_3">Move Request (2/3)</string>
+    <string name="pickup_details">Pickup Details</string>
+    <string name="collection_floor_level">Collection Floor Level</string>
+    <string name="pickup_address">Pickup Address</string>
+    <string name="pickup_city">Pickup City</string>
+    <string name="pickup_postal_code">Pickup Postal Code</string>
+    <string name="delivery_address">Delivery Address</string>
+    <string name="delivery_floor_level">Delivery Floor Level</string>
+    <string name="delivery_city">Delivery City</string>
+    <string name="delivery_postal_code">Delivery Postal Code</string>
+    <string name="move_request_3_3">Move Request (3/3)</string>
+    <string name="_0">0</string>
+    <string name="total_items_to_move">Total Items to Move</string>
+    <string name="create_request">Create Request</string>
+    <string name="add_item">Add Item</string>
+    <string name="add">Add</string>
+    <string name="is_there_anything_else_movers_need_to_know">Is there anything else movers need to know?</string>
+    <string name="move_status">Move Status</string>
+
+
+    <string-array name="move_type_array">
+        <item>House</item>
+        <item>Office</item>
+    </string-array>
+
+    <string-array name="home_item_category_array">
+        <item>Bed Room</item>
+        <item>Living Room</item>
+        <item>Kitchen</item>
+        <item>Bathroom</item>
+        <item>Outdoor</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="floor_level">
+        <item>There is a elevator</item>
+        <item>Basement</item>
+        <item>Ground</item>
+        <item>1st Floor</item>
+        <item>2nd Floor</item>
+        <item>3rd Floor</item>
+        <item>4th Floor</item>
+        <item>5th Floor</item>
+        <item>6th Floor</item>
+        <item>7th Floor</item>
+        <item>8th Floor</item>
+        <item>9th Floor</item>
+        <item>Above 9th Floor</item>
+    </string-array>
+
 
 </resources>

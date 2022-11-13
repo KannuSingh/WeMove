@@ -18,7 +18,7 @@ public class OnboardingRepository {
         this.userOnboardingService = RetrofitClientInstance.getRetrofitInstance().create(IUserOnboardingService.class);
     }
 
-    Call<Boolean> login(UserCredentials userCredentials){
+    Call<UserDetails> login(UserCredentials userCredentials){
        return userOnboardingService.login(userCredentials);
     }
 

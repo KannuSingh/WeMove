@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/customerServicesFragment"
-        android:title="Option1"
-
+        android:id="@+id/myMoveRequestsFragment"
+        android:title="Active Requests"
+        android:icon="@drawable/ic_baseline_view_list_24"
         android:visible="true"
         android:enabled="true"/>
 
     <item
-        android:id="@+id/appointmentListFragment"
-        android:title="Booked Appointments"
-
+        android:id="@+id/moveRequestHistoryFragment"
+        android:title="History"
+        android:icon="@drawable/ic_baseline_history_24"
         android:visible="true"
         android:enabled="true"/>
 
 
     <item
-        android:id="@+id/profileFragment"
+        android:id="@+id/customerProfileFragment"
         android:title="Profile"
-
+        android:icon="@drawable/baseline_account_circle_24"
         android:visible="true"
         android:enabled="true"/>
 </menu>
