@@ -1,61 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    >
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".ui.customer.MyMoveRequestsFragment"
-    >
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp"
+        tools:context=".ui.customer.MyMoveRequestsFragment">
 
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginVertical="20dp"
-            android:layout_gravity="center"
-            android:textSize="20sp"
-            android:textColor="@color/text"
-            android:text="My Move Requests" />
-
-        <Button
-            android:id="@+id/new_move_request"
-            android:layout_width="wrap_content"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:backgroundTint="@color/button_primary"
-            android:text="Create new Request" />
-
-    <TextView
-        android:id="@+id/no_move_requests"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:layout_gravity="center"
-        android:textSize="20sp"
-        android:textColor="@color/text"
-        android:visibility="gone"
-        android:text="No Move Requests Found" />
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:weightSum="4"
+            android:gravity="center"
+            android:orientation="horizontal">
 
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Active Move Requests"
+                android:textColor="@color/text"
+                android:textSize="20sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/my_move_requests_recycler_view"
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/new_move_request"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                />
+                android:layout_weight="1"
+                android:backgroundTint="@color/button_primary"
+                android:text="New" />
+        </LinearLayout>
+
+
+
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginVertical="5dp"
+                    android:weightSum="5">
+                    <TextView
+                        android:id="@+id/tv_filter"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="2"
+                        android:layout_marginVertical="5dp"
+                        android:text="Filter By Status "
+                        android:textColor="@color/text"
+                        android:textSize="12sp"
+                       />
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:minHeight="48dp"
+                        android:layout_weight="3"
+                        android:background="@drawable/gradient_spinner"
+                        >
+                        <Spinner
+                            android:id="@+id/move_request_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+
+                            />
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <TextView
+                    android:id="@+id/no_move_requests"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginVertical="20dp"
+                    android:text="No Move Requests Found"
+                    android:textColor="@color/text"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/my_move_requests_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+
+                    />
+            </LinearLayout>
+
         </ScrollView>
 
 
-
-
-
-</LinearLayout>
+    </LinearLayout>
 </layout>

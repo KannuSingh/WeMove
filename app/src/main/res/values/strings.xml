@@ -100,6 +100,7 @@
     <string name="add">Add</string>
     <string name="is_there_anything_else_movers_need_to_know">Is there anything else movers need to know?</string>
     <string name="move_status">Move Status</string>
+    <string name="name">Name</string>
 
 
     <string-array name="move_type_array">
@@ -130,6 +131,17 @@
         <item>8th Floor</item>
         <item>9th Floor</item>
         <item>Above 9th Floor</item>
+    </string-array>
+
+    <string-array name="move_request_status">
+        <item>Any</item>
+        <item>CREATED</item>
+        <item>SUGGESTED</item>
+        <item>ACCEPTED</item>
+        <item>PICKUP_STARTED</item>
+        <item>ON_ROUTE</item>
+        <item>FINISHED</item>
+        <item>CANCELLED</item>
     </string-array>
 
 

@@ -18,6 +18,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import com.wemove.R;
 import com.wemove.adapters.InventoryItemAdapter;
@@ -32,7 +34,7 @@ import java.util.List;
 
 
 public class MyMoveRequestsFragment extends Fragment {
-    private static final String TAG= "MyMoveRequestsFragment";
+    private static final String TAG = "MyMoveRequestsFragment";
     private FragmentMyMoveRequestsBinding binding;
     private CustomerViewModel customerViewModel;
 
@@ -42,35 +44,43 @@ public class MyMoveRequestsFragment extends Fragment {
         customerViewModel = new ViewModelProvider(requireActivity()).get(CustomerViewModel.class);
 
     }
-        @Override
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my_move_requests, container, false);
         Log.d("MyMoveRequestsFragment", "MyMoveRequestsFragment created/re-created!");
-            SharedPreferences sharedPreferences = getContext().getSharedPreferences("wemove", Context.MODE_PRIVATE);
-            String email = sharedPreferences.getString("email", null);
-            String password = sharedPreferences.getString("password", null);
 
-            customerViewModel.getAllMoveRequest(email,password);
-            final Observer<List<MoveRequest>> moveRequestsObserver = moveRequestList -> {
-                Log.i(TAG,moveRequestList.toString());
-                if(moveRequestList == null || moveRequestList.size() == 0 ){
-                    binding.myMoveRequestsRecyclerView.setVisibility(View.GONE);
-                    binding.noMoveRequests.setVisibility(View.VISIBLE);
-                }
-                else{
-                    bindAdapter(moveRequestList);
-                    binding.myMoveRequestsRecyclerView.setVisibility(View.VISIBLE);
-                    binding.noMoveRequests.setVisibility(View.GONE);
-                }
-            };
-
-            customerViewModel.getActiveMoveRequests().observe(getViewLifecycleOwner(),moveRequestsObserver);
-
-           // List<MoveRequest> moveRequests = customerViewModel.getActiveMoveRequests().getValue();
+        //Setting move status array to spinner dropdown
+        ArrayAdapter<CharSequence> moveRequestStatusAdapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.move_request_status, android.R.layout.simple_spinner_item);
+        moveRequestStatusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        binding.moveRequestStatus.setAdapter(moveRequestStatusAdapter);
 
 
-            return binding.getRoot();
+        SharedPreferences sharedPreferences = getContext().getSharedPreferences("wemove", Context.MODE_PRIVATE);
+        String email = sharedPreferences.getString("email", null);
+        String password = sharedPreferences.getString("password", null);
+
+        customerViewModel.getAllMoveRequest(email, password);
+        final Observer<List<MoveRequest>> moveRequestsObserver = moveRequestList -> {
+            Log.i(TAG, moveRequestList.toString());
+            if (moveRequestList == null || moveRequestList.size() == 0) {
+                binding.myMoveRequestsRecyclerView.setVisibility(View.GONE);
+                binding.noMoveRequests.setVisibility(View.VISIBLE);
+            } else {
+                bindAdapter(moveRequestList);
+                binding.myMoveRequestsRecyclerView.setVisibility(View.VISIBLE);
+                binding.noMoveRequests.setVisibility(View.GONE);
+            }
+        };
+
+        customerViewModel.getActiveMoveRequests().observe(getViewLifecycleOwner(), moveRequestsObserver);
+
+        // List<MoveRequest> moveRequests = customerViewModel.getActiveMoveRequests().getValue();
+
+
+        return binding.getRoot();
     }
 
     @Override
@@ -80,8 +90,24 @@ public class MyMoveRequestsFragment extends Fragment {
         //On newMoveRequest Button Clicked.
         binding.newMoveRequest.setOnClickListener(v -> createNewMoveRequest());
 
+        binding.moveRequestStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                customerViewModel.filterMoveRequestByStatus(adapterView.getItemAtPosition(i).toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
 
     }
+
+
+
+
 
     private void createNewMoveRequest() {
         Navigation.findNavController(getView()).navigate(R.id.action_myMoveRequestsFragment_to_moveRequestFormFragment);
@@ -95,7 +121,7 @@ public class MyMoveRequestsFragment extends Fragment {
 
         });
         binding.myMoveRequestsRecyclerView.setAdapter(listAdapter);
-        Log.i(TAG,"bindAdapter Move Requests");
+        Log.i(TAG, "bindAdapter Move Requests");
         listAdapter.notifyDataSetChanged();
     }
 

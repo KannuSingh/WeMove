@@ -23,6 +23,7 @@ public class CustomerDashboardActivity extends AppCompatActivity {
 
     private ActivityCustomerDashboardBinding binding;
     private CustomerViewModel customerViewModel;
+    private NavController navController ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +32,7 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         binding = ActivityCustomerDashboardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.customer_fragments_view_container);
-        NavController navController = navHostFragment.getNavController();
+        navController = navHostFragment.getNavController();
 
         NavigationUI.setupActionBarWithNavController(this,navHostFragment.getNavController());
 
@@ -44,6 +45,11 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         setLoggedInUser();
 
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return navController.navigateUp() ||  super.onSupportNavigateUp();
     }
 
     @Override

@@ -13,6 +13,8 @@ import com.wemove.network.RetrofitClientInstance;
 import com.wemove.service.ICustomerService;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,6 +30,9 @@ public class CustomerViewModel extends ViewModel {
 
     private MutableLiveData<List<MoveRequest>> _activeMoveRequests = new MutableLiveData<>();
     private LiveData<List<MoveRequest>> activeMoveRequests;
+
+    private MutableLiveData<List<MoveRequest>> _allMoveRequests = new MutableLiveData<>();
+    private LiveData<List<MoveRequest>> allMoveRequests;
 
     private MutableLiveData<List<MoveRequest>> _completedMoveRequests = new MutableLiveData<>();
     private LiveData<List<MoveRequest>> completedMoveRequests;
@@ -72,6 +77,7 @@ public class CustomerViewModel extends ViewModel {
             public void onResponse(Call<List<MoveRequest>> call, Response<List<MoveRequest>> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Customer MoveRequests::"+response.body());
+                    _allMoveRequests.setValue(response.body());
                     _activeMoveRequests.setValue(response.body());
                 }else{
                     Log.i(TAG, "Customer MoveRequests::"+response.raw());
@@ -93,4 +99,17 @@ public class CustomerViewModel extends ViewModel {
 
     }
 
+    public void filterMoveRequestByStatus(String filterStatus) {
+        if("Any".equals(filterStatus)){
+            _activeMoveRequests.setValue(_allMoveRequests.getValue());
+        }else {
+            List<MoveRequest> filteredMoveRequests = new ArrayList<>();
+            for (MoveRequest mr : _allMoveRequests.getValue()) {
+                if (mr.getMoveRequestStatus().toString().equals(filterStatus)) {
+                    filteredMoveRequests.add(mr);
+                }
+            }
+            _activeMoveRequests.setValue(filteredMoveRequests);
+        }
+    }
 }
