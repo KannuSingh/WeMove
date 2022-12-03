@@ -144,29 +144,30 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:gravity="center_horizontal"
+                android:layout_marginHorizontal="60dp"
                 android:orientation="horizontal">
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/button_save"
-                    android:layout_width="110dp"
+                    android:id="@+id/button_update"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="5dp"
                     android:backgroundTint="@color/button_primary"
                     android:text="Update"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/logout"
-                    android:layout_width="110dp"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="30dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_weight="1"
+                    android:layout_marginStart="5dp"
                     android:backgroundTint="@color/button_primary"
                     android:text="logout"
-                    android:textSize="18sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
 

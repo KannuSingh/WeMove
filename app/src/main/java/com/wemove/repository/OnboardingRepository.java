@@ -1,6 +1,7 @@
 package com.wemove.repository;
 
 import com.wemove.model.ResetPasswordDAO;
+import com.wemove.model.SecurityQuestionDto;
 import com.wemove.model.UserCredentials;
 import com.wemove.model.UserDetails;
 import com.wemove.network.RetrofitClientInstance;
@@ -18,19 +19,19 @@ public class OnboardingRepository {
         this.userOnboardingService = RetrofitClientInstance.getRetrofitInstance().create(IUserOnboardingService.class);
     }
 
-    Call<UserDetails> login(UserCredentials userCredentials){
+    public Call<UserDetails> login(UserCredentials userCredentials){
        return userOnboardingService.login(userCredentials);
     }
 
-    Call<UserDetails> register(UserDetails userDetails){
+    public Call<UserDetails> register(UserDetails userDetails){
         return userOnboardingService.register(userDetails);
     }
 
-    Call<String> forgotPassword(String email ){
+    public Call<SecurityQuestionDto> forgotPassword(String email ){
         return userOnboardingService.forgotPassword(email);
     }
 
-    Call<String> resetPassword(ResetPasswordDAO resetPassword ){
+    public Call<Boolean> resetPassword(ResetPasswordDAO resetPassword ){
         return userOnboardingService.resetPassword(resetPassword);
     }
 

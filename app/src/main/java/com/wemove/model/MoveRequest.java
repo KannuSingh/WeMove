@@ -19,6 +19,7 @@ public class MoveRequest {
     private String deliveryFloorLevel;
     private Address deliveryAddress;
     private List<InventoryItemGroup> itemInventory;
+    private List<PriceQuote> priceQuotes;
 
     public String getMoveRequestOwner() {
         return moveRequestOwner;
@@ -130,6 +131,14 @@ public class MoveRequest {
 
     public void setItemInventory(List<InventoryItemGroup> itemInventory) {
         this.itemInventory = itemInventory;
+    }
+
+    public List<PriceQuote> getPriceQuotes() {
+        return priceQuotes;
+    }
+
+    public void setPriceQuotes(List<PriceQuote> priceQuotes) {
+        this.priceQuotes = priceQuotes;
     }
 
     @Override

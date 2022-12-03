@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Any number of images of our choice -->
+    <item android:drawable="@drawable/truck"/>
+    <item android:drawable="@drawable/ic_baseline_favorite_border_24"
+        android:width="180dp"
+        android:height="180dp"
+        android:gravity="center"
+        android:top="-35dp"
+        android:start="100dp"
+        />
+
+</layer-list>

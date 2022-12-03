@@ -1,6 +1,7 @@
 package com.wemove.service;
 
 import com.wemove.model.MoveRequest;
+import com.wemove.model.MoveRequestDto;
 
 import java.util.List;
 
@@ -14,8 +15,12 @@ public interface ICustomerService {
     @POST("/createMoveRequest")
     Call<Boolean> createMoveRequest(@Body MoveRequest moveRequest);
 
-    @POST("/getAllMoveRequest")
-    Call<List<MoveRequest>> getAllCustomerMoveRequest(@Query("email") String email );
+    @POST("/getAllCustomerMoveRequest")
+    Call<List<MoveRequestDto>> getAllCustomerMoveRequest(@Query("email") String email );
 
+    @POST("/acceptPriceQuote")
+    Call<Boolean> acceptPriceQuote(@Query("moverEmail") String moverEmail,@Query("moveRequestId") int moveRequestId);
 
+    @POST("/declinePriceQuote")
+    Call<Boolean> declinePriceQuote(@Query("moverEmail")String moverEmail, @Query("moveRequestId") int moveRequestId);
 }

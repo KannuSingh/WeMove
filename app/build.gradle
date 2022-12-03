@@ -32,8 +32,11 @@ android {
 }
 
 dependencies {
+
     //navigation dependencies
     def nav_version = "2.5.3"
+
+    implementation 'com.journeyapps:zxing-android-embedded:4.3.0'
 
     // Java language implementation
     implementation "androidx.navigation:navigation-fragment:$nav_version"

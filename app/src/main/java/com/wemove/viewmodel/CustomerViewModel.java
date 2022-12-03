@@ -7,14 +7,19 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
+import com.wemove.model.InventoryItemGroup;
 import com.wemove.model.MoveRequest;
+import com.wemove.model.MoveRequestDto;
+import com.wemove.model.PriceQuote;
 import com.wemove.model.UserDetails;
 import com.wemove.network.RetrofitClientInstance;
+import com.wemove.repository.CustomerRepository;
 import com.wemove.service.ICustomerService;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import retrofit2.Call;
@@ -28,14 +33,31 @@ public class CustomerViewModel extends ViewModel {
     private MutableLiveData<UserDetails> _userDetails = new MutableLiveData<>();
     private LiveData<UserDetails> userDetails;
 
-    private MutableLiveData<List<MoveRequest>> _activeMoveRequests = new MutableLiveData<>();
-    private LiveData<List<MoveRequest>> activeMoveRequests;
+    private MutableLiveData<List<MoveRequestDto>> _activeMoveRequests = new MutableLiveData<>();
+    private LiveData<List<MoveRequestDto>> activeMoveRequests;
 
-    private MutableLiveData<List<MoveRequest>> _allMoveRequests = new MutableLiveData<>();
-    private LiveData<List<MoveRequest>> allMoveRequests;
+    private MutableLiveData<List<MoveRequestDto>> _allMoveRequests = new MutableLiveData<>();
+    private LiveData<List<MoveRequestDto>> allMoveRequests;
 
-    private MutableLiveData<List<MoveRequest>> _completedMoveRequests = new MutableLiveData<>();
-    private LiveData<List<MoveRequest>> completedMoveRequests;
+    private MutableLiveData<List<MoveRequestDto>> _completedMoveRequests = new MutableLiveData<>();
+    private LiveData<List<MoveRequestDto>> completedMoveRequests;
+
+    private MutableLiveData<MoveRequestDto> _selectedMoveRequest = new MutableLiveData<>();
+    private LiveData<MoveRequestDto> selectedMoveRequest;
+
+
+    private MutableLiveData<PriceQuote> _selectedPriceQuote = new MutableLiveData<>();
+    private LiveData<PriceQuote> selectedPriceQuote;
+
+    public LiveData<PriceQuote> getSelectedPriceQuote() {
+        return _selectedPriceQuote;
+    }
+
+    public void setSelectedPriceQuote(PriceQuote selectedPriceQuote) {
+        _selectedPriceQuote.setValue(selectedPriceQuote);
+    }
+
+
 
     private MutableLiveData<String> _email = new MutableLiveData<>();
 
@@ -47,20 +69,30 @@ public class CustomerViewModel extends ViewModel {
         return _userDetails;
     }
 
-    public LiveData<List<MoveRequest>> getActiveMoveRequests() {
+    public LiveData<List<MoveRequestDto>> getActiveMoveRequests() {
         return _activeMoveRequests;
     }
 
-    public LiveData<List<MoveRequest>> getCompletedMoveRequests() {
+    public LiveData<List<MoveRequestDto>> getCompletedMoveRequests() {
         return _completedMoveRequests;
+    }
+
+    public LiveData<MoveRequestDto> getSelectedMoveRequest() {
+        return _selectedMoveRequest;
+    }
+
+    public void setSelectedMoveRequest(MoveRequestDto selectedMoveRequestDto) {
+        _selectedMoveRequest.setValue(selectedMoveRequestDto);
+
     }
 
     public CustomerViewModel(){
         Log.d(TAG,"CustomerViewModel Created : "+this.toString());
         _activeMoveRequests.setValue(new ArrayList<>());
         _completedMoveRequests.setValue(new ArrayList<>());
-
     }
+
+
     public void setUser( String email, String password,String userDetails){
         _email.setValue(email);
         _password.setValue(password);
@@ -68,13 +100,15 @@ public class CustomerViewModel extends ViewModel {
         _userDetails.setValue(gson.fromJson(userDetails,UserDetails.class));
     }
 
-    public void getAllMoveRequest(String email, String password){
-        ICustomerService customerService = RetrofitClientInstance.createService(ICustomerService.class,email,password);
-        Call<List<MoveRequest>> moveRequestList = customerService.getAllCustomerMoveRequest(email);
 
-        moveRequestList.enqueue(new Callback<List<MoveRequest>>() {
+
+    public void getAllMoveRequest(String email, String password){
+        CustomerRepository customerRepository = new CustomerRepository(email,password);
+        Call<List<MoveRequestDto>> moveRequestList = customerRepository.getAllCustomerMoveRequest(email);
+
+        moveRequestList.enqueue(new Callback<List<MoveRequestDto>>() {
             @Override
-            public void onResponse(Call<List<MoveRequest>> call, Response<List<MoveRequest>> response) {
+            public void onResponse(Call<List<MoveRequestDto>> call, Response<List<MoveRequestDto>> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Customer MoveRequests::"+response.body());
                     _allMoveRequests.setValue(response.body());
@@ -85,12 +119,14 @@ public class CustomerViewModel extends ViewModel {
             }
 
             @Override
-            public void onFailure(Call<List<MoveRequest>> call, Throwable t) {
+            public void onFailure(Call<List<MoveRequestDto>> call, Throwable t) {
                 Log.i(TAG, "Customer MoveRequests:: Failed");
             }
         });
 
     }
+
+
 
     @Override
     protected void onCleared() {
@@ -99,13 +135,28 @@ public class CustomerViewModel extends ViewModel {
 
     }
 
+    public HashMap<String,List<String>> getInventoryDataOfSelectedMoveRequest(){
+        HashMap<String, List<String>> inventoryListDetail = new HashMap<String, List<String>>();
+        if(_selectedMoveRequest != null && _selectedMoveRequest.getValue().getMoveRequest().getItemInventory() != null){
+            for (InventoryItemGroup inventoryItem: _selectedMoveRequest.getValue().getMoveRequest().getItemInventory()) {
+                if(inventoryListDetail.containsKey(inventoryItem.getCategory())){
+                    inventoryListDetail.get(inventoryItem.getCategory()).addAll(inventoryItem.getItems());
+                }
+                else{
+                    inventoryListDetail.put(inventoryItem.getCategory(),inventoryItem.getItems());
+                }
+            }
+        }
+        return inventoryListDetail;
+    }
+
     public void filterMoveRequestByStatus(String filterStatus) {
         if("Any".equals(filterStatus)){
             _activeMoveRequests.setValue(_allMoveRequests.getValue());
         }else {
-            List<MoveRequest> filteredMoveRequests = new ArrayList<>();
-            for (MoveRequest mr : _allMoveRequests.getValue()) {
-                if (mr.getMoveRequestStatus().toString().equals(filterStatus)) {
+            List<MoveRequestDto> filteredMoveRequests = new ArrayList<>();
+            for (MoveRequestDto mr : _allMoveRequests.getValue()) {
+                if (mr.getMoveRequest().getMoveRequestStatus().toString().equals(filterStatus)) {
                     filteredMoveRequests.add(mr);
                 }
             }

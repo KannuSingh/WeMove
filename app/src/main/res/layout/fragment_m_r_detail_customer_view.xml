@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ui.customer.MRDetailCustomerViewFragment">
+
+
+            <TextView
+                android:id="@+id/tv_move_request_form"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="MoveRequest Details"
+                android:textColor="@color/text"
+                android:textSize="18sp" />
+
+
+            <!--Move Request Details -->
+
+            <LinearLayout
+                android:id="@+id/move_request_details_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_move_request_form"
+                android:layout_gravity="fill_horizontal"
+                android:layout_margin="5dp"
+                android:background="@color/shadow_background"
+                android:gravity="center_vertical"
+                android:orientation="vertical"
+                android:padding="18dp">
+
+                <TextView
+                    android:id="@+id/tv_move_request_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:text="@string/move_title"
+                    android:textColor="@color/text"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_move_request_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="2dp"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/move_type"
+                        android:textColor="@color/text"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tv_move_request_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="2dp"
+                        android:layout_weight="1"
+                        android:paddingHorizontal="4dp"
+                        android:text="@string/move_request_date"
+                        android:textAlignment="viewEnd"
+                        android:textColor="@color/text"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:baselineAligned="false"
+                    android:gravity="center">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_mr_pickup_address"
+                            app:drawableLeftCompat="@drawable/ic_baseline_location_on_24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/source_address"
+                            android:textColor="@color/text"
+                            android:textSize="12sp" />
+
+
+                        <TextView
+                            android:id="@+id/tv_mr_destination_address"
+                            app:drawableLeftCompat="@drawable/ic_baseline_location_on_24"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/destination_address"
+                            android:textColor="@color/text"
+                            android:textSize="12sp" />
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="end"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_move_request_status"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/gradient_spinner"
+                            android:backgroundTintMode="multiply"
+                            android:padding="5dp"
+                            android:text="@string/move_status"
+                            android:textAllCaps="true"
+
+                            android:textColor="@color/purple_700"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_move_request_quote_count"
+                            app:drawableLeftCompat="@drawable/ic_baseline_discount_12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:text=" 0 Quote"
+                            android:textColor="@color/text"
+                            android:textSize="12sp" />
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_items_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/move_request_details_card"
+                android:layout_gravity="center"
+                android:layout_marginVertical="5dp"
+                android:paddingHorizontal="18dp"
+                android:text="Items Category"
+                android:textColor="@color/text"
+                android:textSize="12sp" />
+
+            <ExpandableListView
+                android:id="@+id/expandable_list_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tv_items_category"
+                android:divider="@android:color/darker_gray"
+                android:dividerHeight="0.5dp"
+                android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
+                android:paddingHorizontal="8dp" />
+
+            <LinearLayout
+                android:id="@+id/quotation_details"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/expandable_list_view"
+                android:orientation="vertical">
+                <!--Mover Quotes -->
+                <ScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_filter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="0dp"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="5dp"
+                            android:layout_weight="2"
+                            android:text="Quotes"
+                            android:textColor="@color/text"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/no_move_requests"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginVertical="20dp"
+                            android:text="No Quotes Found"
+                            android:textColor="@color/text"
+                            android:textSize="20sp"
+                            android:visibility="gone" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/move_request_quotes_recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="12dp"
+
+                            />
+                    </LinearLayout>
+
+                </ScrollView>
+
+            </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/quotation_details"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="@color/button_primary"
+                android:visibility="gone"
+                android:text="Generate OTP" />
+
+
+        </RelativeLayout>
+
+
+    </ScrollView>
+</layout>

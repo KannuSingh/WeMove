@@ -1,6 +1,7 @@
 package com.wemove.service;
 
 import com.wemove.model.ResetPasswordDAO;
+import com.wemove.model.SecurityQuestionDto;
 import com.wemove.model.UserCredentials;
 import com.wemove.model.UserDetails;
 
@@ -18,11 +19,11 @@ public interface  IUserOnboardingService{
     @POST("/register")
     Call<UserDetails> register(@Body UserDetails userDetails);
 
-    @GET("/forgotPassword")
-    Call<String> forgotPassword(@Query("email") String email );
+    @POST("/forgotPassword")
+    Call<SecurityQuestionDto> forgotPassword(@Query("email") String email );
 
     @POST("/forgotPassword/resetPassword")
-    Call<String> resetPassword(@Body ResetPasswordDAO resetPassword );
+    Call<Boolean> resetPassword(@Body ResetPasswordDAO resetPassword );
 
 
 }

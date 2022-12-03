@@ -84,23 +84,15 @@
                         android:id="@+id/tv_inventory_size"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+
                         android:layout_weight="1"
                         android:text="@string/_0"
-                        android:textAlignment="center"
+                        android:textAlignment="viewEnd"
                         android:textAllCaps="true"
                         android:textColor="@color/text"
                         android:textSize="16sp" />
 
-                    <Button
-                        android:id="@+id/create_request"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:backgroundTint="@color/button_primary"
-                        android:text="@string/create_request"
-                        android:visibility="invisible" />
+
 
 
                 </LinearLayout>
@@ -111,33 +103,50 @@
                     android:layout_marginVertical="20dp"
 
                     >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/home_inventory_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_inventory_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_item_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/is_there_anything_else_movers_need_to_know"
+        android:textColor="@color/text"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/et_other_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_spinner"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        android:lines="5" />
+
+    <Button
+        android:id="@+id/create_request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="@color/button_primary"
+        android:text="@string/create_request"
+        android:visibility="invisible"
+        />
+</LinearLayout>
+
 
 
                 </ScrollView>
 
-                <TextView
-                    android:id="@+id/tv_item_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/is_there_anything_else_movers_need_to_know"
-                    android:textColor="@color/text"
-                    android:textSize="14sp" />
-
-                <EditText
-                    android:id="@+id/et_other_details"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/gradient_spinner"
-                    android:ems="10"
-                    android:gravity="start|top"
-                    android:inputType="textMultiLine"
-                    android:lines="5" />
 
             </LinearLayout>
 

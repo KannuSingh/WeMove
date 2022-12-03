@@ -27,6 +27,7 @@ import com.wemove.adapters.MoveRequestAdapter;
 import com.wemove.databinding.FragmentMyMoveRequestsBinding;
 import com.wemove.model.InventoryItemGroup;
 import com.wemove.model.MoveRequest;
+import com.wemove.model.MoveRequestDto;
 import com.wemove.viewmodel.CustomerViewModel;
 import com.wemove.viewmodel.MoveRequestFormViewModel;
 
@@ -63,12 +64,14 @@ public class MyMoveRequestsFragment extends Fragment {
         String password = sharedPreferences.getString("password", null);
 
         customerViewModel.getAllMoveRequest(email, password);
-        final Observer<List<MoveRequest>> moveRequestsObserver = moveRequestList -> {
-            Log.i(TAG, moveRequestList.toString());
+        final Observer<List<MoveRequestDto>> moveRequestsObserver = moveRequestList -> {
+
             if (moveRequestList == null || moveRequestList.size() == 0) {
+
                 binding.myMoveRequestsRecyclerView.setVisibility(View.GONE);
                 binding.noMoveRequests.setVisibility(View.VISIBLE);
             } else {
+                Log.i(TAG, moveRequestList.toString());
                 bindAdapter(moveRequestList);
                 binding.myMoveRequestsRecyclerView.setVisibility(View.VISIBLE);
                 binding.noMoveRequests.setVisibility(View.GONE);
@@ -86,9 +89,9 @@ public class MyMoveRequestsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-
+        binding.newMoveRequestFab.setOnClickListener(v -> createNewMoveRequest());
         //On newMoveRequest Button Clicked.
-        binding.newMoveRequest.setOnClickListener(v -> createNewMoveRequest());
+       // binding.newMoveRequest.setOnClickListener(v -> createNewMoveRequest());
 
         binding.moveRequestStatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -114,15 +117,22 @@ public class MyMoveRequestsFragment extends Fragment {
     }
 
 
-    private void bindAdapter(List<MoveRequest> moveRequestList) {
+    private void bindAdapter(List<MoveRequestDto> moveRequestList) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         binding.myMoveRequestsRecyclerView.setLayoutManager(layoutManager);
         MoveRequestAdapter listAdapter = new MoveRequestAdapter(moveRequestList, (moveRequest) -> {
-
+            Log.i(TAG,"Item Clicked");
+            onMoveRequestClicked(moveRequest);
         });
         binding.myMoveRequestsRecyclerView.setAdapter(listAdapter);
         Log.i(TAG, "bindAdapter Move Requests");
         listAdapter.notifyDataSetChanged();
+    }
+
+    private void onMoveRequestClicked(MoveRequestDto moveRequest){
+        customerViewModel.setSelectedMoveRequest(moveRequest);
+
+        Navigation.findNavController(getView()).navigate(R.id.action_myMoveRequestsFragment_to_MRDetailCustomerViewFragment);
     }
 
 }

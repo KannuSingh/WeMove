@@ -1,6 +1,7 @@
 package com.wemove.repository;
 
 import com.wemove.model.MoveRequest;
+import com.wemove.model.MoveRequestDto;
 import com.wemove.network.RetrofitClientInstance;
 import com.wemove.service.ICustomerService;
 
@@ -17,12 +18,19 @@ public class CustomerRepository {
         this.customerService = RetrofitClientInstance.createService(ICustomerService.class,username,password);
     }
 
-    Call<List<MoveRequest>> getAllCustomerMoveRequest(String email){
+    public Call<List<MoveRequestDto>> getAllCustomerMoveRequest(String email){
         return customerService.getAllCustomerMoveRequest(email);
     }
 
-    Call<Boolean> createMoveRequest(MoveRequest moveRequest){
+    public Call<Boolean> createMoveRequest(MoveRequest moveRequest){
         return customerService.createMoveRequest(moveRequest);
     }
 
+    public Call<Boolean> acceptPriceQuote(String moverEmail, int moveRequestId){
+        return customerService.acceptPriceQuote( moverEmail,  moveRequestId);
+    }
+
+    public Call<Boolean> declinePriceQuote(String moverEmail, int moveRequestId) {
+        return customerService.declinePriceQuote( moverEmail,  moveRequestId);
+    }
 }

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_myMoveRequestsFragment_to_moveRequestFormFragment"
             app:destination="@id/moveRequestFormFragment" />
+        <action
+            android:id="@+id/action_myMoveRequestsFragment_to_MRDetailCustomerViewFragment"
+            app:destination="@id/MRDetailCustomerViewFragment" />
     </fragment>
     <fragment
         android:id="@+id/moveRequestHistoryFragment"
@@ -62,5 +65,23 @@
         <action
             android:id="@+id/action_inventoryItemDetailFragment_to_homeInventoryFragment"
             app:destination="@id/homeInventoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/MRDetailCustomerViewFragment"
+        android:name="com.wemove.ui.customer.MRDetailCustomerViewFragment"
+        android:label="MRDetailCustomerViewFragment"
+        tools:layout="@layout/fragment_m_r_detail_customer_view" >
+        <action
+            android:id="@+id/action_MRDetailCustomerViewFragment_to_reviewAndRatingFragment"
+            app:destination="@id/reviewAndRatingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewAndRatingFragment"
+        android:name="com.wemove.ui.common.ReviewAndRatingFragment"
+        android:label="fragment_review_and_rating"
+        tools:layout="@layout/fragment_review_and_rating" >
+        <action
+            android:id="@+id/action_reviewAndRatingFragment_to_myMoveRequestsFragment"
+            app:destination="@id/myMoveRequestsFragment" />
     </fragment>
 </navigation>

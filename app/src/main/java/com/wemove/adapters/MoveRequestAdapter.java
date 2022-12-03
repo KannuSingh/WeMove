@@ -1,5 +1,6 @@
 package com.wemove.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,20 +12,21 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.wemove.R;
 import com.wemove.model.InventoryItemGroup;
 import com.wemove.model.MoveRequest;
+import com.wemove.model.MoveRequestDto;
 
 import java.util.List;
 
 public class MoveRequestAdapter extends RecyclerView.Adapter<MoveRequestAdapter.MoveRequestViewHolder>{
-    private final List<MoveRequest> moveRequestList;
+    private final List<MoveRequestDto> moveRequestList;
 
 
 
     public interface OnItemClickListener {
-        void onItemClick(MoveRequest moveRequest);
+        void onItemClick(MoveRequestDto moveRequest);
     }
     private final MoveRequestAdapter.OnItemClickListener listener;
 
-    public MoveRequestAdapter(List<MoveRequest> moveRequestList, OnItemClickListener listener) {
+    public MoveRequestAdapter(List<MoveRequestDto> moveRequestList, OnItemClickListener listener) {
         this.moveRequestList = moveRequestList;
         this.listener = listener;
     }
@@ -38,13 +40,16 @@ public class MoveRequestAdapter extends RecyclerView.Adapter<MoveRequestAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull MoveRequestViewHolder holder, int position) {
-        MoveRequest moveRequest = moveRequestList.get(position);
+        MoveRequestDto moveRequestDto = moveRequestList.get(position);
+        MoveRequest moveRequest = moveRequestDto.getMoveRequest();
         holder.moveTitle.setText(moveRequest.getMoveTitle());
         holder.moveRequestStatus.setText(String.valueOf(moveRequest.getMoveRequestStatus()));
         holder.moveRequestType.setText(moveRequest.getMoveType());
         holder.moveRequestCreatedDate.setText(moveRequest.getCreatedOn());
         holder.pickupAddress.setText(String.format("%s, %s", moveRequest.getPickupAddress().getAddress1(), moveRequest.getPickupAddress().getCity()));
         holder.destinationAddress.setText(String.format("%s, %s", moveRequest.getDeliveryAddress().getAddress1(), moveRequest.getDeliveryAddress().getCity()));
+        holder.moveRequestQuoteCount.setText(String.format(" %s Quote",moveRequestDto.getPriceQuotes().size()));
+        holder.bind(moveRequestDto,listener);
     }
 
     @Override
@@ -64,6 +69,7 @@ public class MoveRequestAdapter extends RecyclerView.Adapter<MoveRequestAdapter.
         public TextView pickupAddress;
         public TextView destinationAddress;
         public TextView moveRequestStatus;
+        public TextView moveRequestQuoteCount;
 
 
         public MoveRequestViewHolder(@NonNull View moveRequestItemView) {
@@ -74,11 +80,13 @@ public class MoveRequestAdapter extends RecyclerView.Adapter<MoveRequestAdapter.
             this.moveRequestStatus = (TextView) moveRequestItemView.findViewById(R.id.tv_move_request_status);
             this.pickupAddress = (TextView) moveRequestItemView.findViewById(R.id.tv_mr_pickup_address);
             this.destinationAddress = (TextView) moveRequestItemView.findViewById(R.id.tv_mr_destination_address);
+            this.moveRequestQuoteCount = (TextView) moveRequestItemView.findViewById(R.id.move_request_quote_count);
         }
 
-        public void bind(final MoveRequest moveRequest, final MoveRequestAdapter.OnItemClickListener listener) {
+        public void bind(final MoveRequestDto moveRequest, final MoveRequestAdapter.OnItemClickListener listener) {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
+                    Log.i("MoveRequestAdapter","Item Clicked !");
                     listener.onItemClick(moveRequest);
                 }
             });

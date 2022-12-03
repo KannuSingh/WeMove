@@ -45,7 +45,9 @@ public class RegistrationViewModel extends ViewModel {
         onboardingService.register(userDetails).enqueue(new Callback<UserDetails>() {
             @Override
             public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
-                Log.i("Registration Response :", response.body().toString());
+                if(response.isSuccessful()) {
+                    Log.i("Registration Response :", response.body().toString());
+                }
             }
 
             @Override

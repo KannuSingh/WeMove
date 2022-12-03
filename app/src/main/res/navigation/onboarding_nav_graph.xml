@@ -38,6 +38,12 @@
         <action
             android:id="@+id/action_splashScreenFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_moverDashboardActivity"
+            app:destination="@id/moverDashboardActivity" />
+        <action
+            android:id="@+id/action_splashScreenFragment_to_customerDashboardActivity"
+            app:destination="@id/customerDashboardActivity" />
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"

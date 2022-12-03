@@ -33,7 +33,7 @@ import java.util.Map;
 public class LoginFragment extends Fragment {
     private FragmentLoginBinding binding;
     private LoginViewModel  loginViewModel;
-
+    private String TAG="LoginFragment";
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor sharedEditor;
 
@@ -74,10 +74,15 @@ public class LoginFragment extends Fragment {
                     Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_customerDashboardActivity);
 
                 }else if(userDetails!=null && userDetails.getUserType().equals(UserType.MOVER)) {
+                    String email = binding.etEmail.getText().toString();
+                    String password = binding.etPassword.getText().toString();
+                    setLoggedInUserDetails(userDetails,email,password);
                     Navigation.findNavController(getView()).navigate(R.id.action_loginFragment_to_moverDashboardActivity);
 
                 }
-                Log.i("LoginFragment","Invalid User Credentials");
+                binding.etEmail.setText("");
+                binding.etPassword.setText("");
+
             }
         };
 
@@ -92,8 +97,6 @@ public class LoginFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false);
         Log.d("LoginFragment", "LoginFragment created/re-created!");
-        //  NavHostFragment navHostFragment = (NavHostFragment) requireActivity().getSupportFragmentManager().findFragmentById(R.id.view_onboarding_container);
-        // NavController navController = navHostFragment.getNavController();
 
 
 
@@ -120,6 +123,7 @@ public class LoginFragment extends Fragment {
         String password = binding.etPassword.getText().toString();
         loginViewModel.login(email,password);
 
+
     }
 
     private void setErrorTextField(boolean error) {
@@ -145,6 +149,9 @@ public class LoginFragment extends Fragment {
         sharedEditor.putString("email",email);
         sharedEditor.putString("password",password);
         sharedEditor.putString("userDetails", userDetailsString);
+        sharedEditor.putBoolean("isUserLoggedIn",true);
+        Log.i(TAG,userDetails.getUserType().name());
+        sharedEditor.putString("user_type",userDetails.getUserType().name());
         sharedEditor.commit();
         sharedEditor.apply();
     }

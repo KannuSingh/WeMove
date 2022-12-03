@@ -53,7 +53,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        >
+        android:baselineAligned="false">
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -80,21 +81,42 @@
                 app:drawableLeftCompat="@drawable/ic_baseline_location_on_24" />
 
 
-
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_move_request_status"
+        <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textAlignment="viewEnd"
-            android:text="@string/move_status"
-            android:textColor="@color/text"
-            android:textSize="12sp"
-             />
-    </LinearLayout>
+            android:gravity="end"
+            android:orientation="vertical">
 
+            <TextView
+                android:id="@+id/tv_move_request_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/move_status"
+                android:textAllCaps="true"
+                android:textColor="@color/purple_700"
+                android:background="@drawable/gradient_spinner"
+
+                android:backgroundTintMode="multiply"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/move_request_quote_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" 0 Quote"
+                android:padding="5dp"
+                android:textColor="@color/text"
+                android:textSize="12sp"
+                app:drawableLeftCompat="@drawable/ic_baseline_discount_12" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>

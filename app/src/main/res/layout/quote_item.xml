@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="fill_horizontal"
+    android:layout_margin="2dp"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="@color/shadow_background"
+    >
+
+    <TextView
+        android:id="@+id/tv_quote_mover_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:textColor="@color/text"
+        android:text="MoverName"
+        android:layout_marginVertical="2dp"
+        android:textSize="14sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_quote_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:textColor="@color/text"
+        android:text="Price"
+        android:layout_marginVertical="2dp"
+        android:textSize="14sp"
+        android:drawableLeft="@drawable/ic_baseline_request_quote_24"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_quote_status"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:textColor="@color/text"
+        android:paddingHorizontal="3dp"
+        android:text="Quote Status"
+        android:layout_marginVertical="2dp"
+        android:textSize="14sp"
+        />
+
+</LinearLayout>

@@ -1,6 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/mover_nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mover_nav_graph"
+    app:startDestination="@id/moverDashboardFragment">
+
+    <fragment
+        android:id="@+id/findDeliveryFragment"
+        android:name="com.wemove.ui.mover.FindDeliveryFragment"
+        android:label="Search Move Request"
+        tools:layout="@layout/fragment_find_delivery" >
+        <action
+            android:id="@+id/action_findDeliveryFragment_to_MRDetailMoverViewFragment"
+            app:destination="@id/MRDetailMoverViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoriteDeliveryFragment"
+        android:name="com.wemove.ui.mover.FavoriteDeliveryFragment"
+        android:label="My Move Request"
+        tools:layout="@layout/fragment_favorite_delivery">
+        <action
+            android:id="@+id/action_favoriteDeliveryFragment_to_MRDetailMoverViewFragment"
+            app:destination="@id/MRDetailMoverViewFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pastDeliveryFragment"
+        android:name="com.wemove.ui.mover.PastDeliveryFragment"
+        android:label="Completed Move Request"
+        tools:layout="@layout/fragment_past_delivery" />
+    <fragment
+        android:id="@+id/moverProfileFragment"
+        android:name="com.wemove.ui.mover.MoverProfileFragment"
+        android:label="Profile Details"
+        tools:layout="@layout/fragment_mover_profile"/>
+    <fragment
+        android:id="@+id/MRDetailMoverViewFragment"
+        android:name="com.wemove.ui.mover.MRDetailMoverViewFragment"
+        android:label="MRDetailMoverViewFragment"
+        tools:layout="@layout/fragment_m_r_detail_mover_view"/>
+    <fragment
+        android:id="@+id/moverDashboardFragment"
+        android:name="com.wemove.ui.mover.MoverDashboardFragment"
+        android:label="Mover Dashboard"
+        tools:layout="@layout/fragment_mover_dashboard">
+        <action
+            android:id="@+id/action_moverDashboardFragment_to_findDeliveryFragment"
+            app:destination="@id/findDeliveryFragment" />
+        <action
+            android:id="@+id/action_moverDashboardFragment_to_favoriteDeliveryFragment"
+            app:destination="@id/favoriteDeliveryFragment" />
+        <action
+            android:id="@+id/action_moverDashboardFragment_to_pastDeliveryFragment"
+            app:destination="@id/pastDeliveryFragment" />
+    </fragment>
 
 </navigation>
