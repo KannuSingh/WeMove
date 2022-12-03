@@ -3,6 +3,7 @@ package com.wemove.repository;
 import com.wemove.model.MRStatusItem;
 import com.wemove.model.MoveRequest;
 import com.wemove.model.MoveRequestDto;
+import com.wemove.model.MoveStatus;
 import com.wemove.model.PriceQuote;
 import com.wemove.model.Review;
 import com.wemove.network.RetrofitClientInstance;
@@ -13,6 +14,7 @@ import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.POST;
 import retrofit2.http.Query;
 
 public class MoverRepository {
@@ -42,6 +44,12 @@ public class MoverRepository {
     public Call<List<MRStatusItem>> getStatusTimeline(int moveRequestId){
         return moverService.getStatusTimeline(moveRequestId);
     }
+
+
+    public Call<Void> updateMoveRequestStatus(int moveRequestId, MoveStatus moveStatus){
+        return  moverService.updateMoveRequestStatus(moveRequestId,moveStatus);
+    }
+
 
 
 }

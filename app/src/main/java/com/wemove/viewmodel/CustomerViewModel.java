@@ -11,6 +11,7 @@ import com.wemove.model.InventoryItemGroup;
 import com.wemove.model.MoveRequest;
 import com.wemove.model.MoveRequestDto;
 import com.wemove.model.PriceQuote;
+import com.wemove.model.QuoteStatus;
 import com.wemove.model.UserDetails;
 import com.wemove.network.RetrofitClientInstance;
 import com.wemove.repository.CustomerRepository;
@@ -59,6 +60,7 @@ public class CustomerViewModel extends ViewModel {
 
 
 
+
     private MutableLiveData<String> _email = new MutableLiveData<>();
 
 
@@ -83,7 +85,11 @@ public class CustomerViewModel extends ViewModel {
 
     public void setSelectedMoveRequest(MoveRequestDto selectedMoveRequestDto) {
         _selectedMoveRequest.setValue(selectedMoveRequestDto);
-
+        for(PriceQuote priceQuote:selectedMoveRequestDto.getPriceQuotes()){
+            if(priceQuote.getQuoteStatus().equals(QuoteStatus.ACCEPTED)){
+                _selectedPriceQuote.setValue(priceQuote);
+            }
+        }
     }
 
     public CustomerViewModel(){

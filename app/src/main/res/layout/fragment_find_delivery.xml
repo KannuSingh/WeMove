@@ -6,7 +6,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp"
+            android:paddingHorizontal="11dp"
             android:background="@color/card_bg"
             tools:context=".ui.mover.FindDeliveryFragment">
 

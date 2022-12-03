@@ -164,6 +164,7 @@
                     android:layout_gravity="center"
                     android:layout_marginVertical="5dp"
                     android:paddingHorizontal="18dp"
+                    android:textStyle="bold"
                     android:text="Items Category"
                     android:textColor="@color/text"
                     android:textSize="12sp" />
@@ -177,7 +178,6 @@
                     android:dividerHeight="0.5dp"
                     android:indicatorLeft="?android:attr/expandableListPreferredItemIndicatorLeft"
                     android:paddingHorizontal="8dp" />
-
 
                 <LinearLayout
                     android:id="@+id/quotation_details"
@@ -200,6 +200,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginVertical="5dp"
+                            android:textStyle="bold"
                             android:text="Are you interested in this move request? If yes, submit your quotation."
                             android:textColor="@color/text"
                             android:textSize="12sp" />
@@ -254,7 +255,9 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="My Quote" />
+                            android:text="My Quote"
+                            android:textColor="@color/text"
+                            android:textStyle="bold"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -295,7 +298,19 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/quotation_details"
+                    android:paddingHorizontal="18dp"
                     android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_move_status_timeline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginVertical="5dp"
+                        android:text="Status Timeline"
+                        android:textStyle="bold"
+                        android:textColor="@color/text"
+                        android:textSize="12sp" />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/timeline_listView"

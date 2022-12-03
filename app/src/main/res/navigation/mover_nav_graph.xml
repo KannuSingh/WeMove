@@ -37,7 +37,14 @@
         android:id="@+id/MRDetailMoverViewFragment"
         android:name="com.wemove.ui.mover.MRDetailMoverViewFragment"
         android:label="MRDetailMoverViewFragment"
-        tools:layout="@layout/fragment_m_r_detail_mover_view"/>
+        tools:layout="@layout/fragment_m_r_detail_mover_view">
+        <action
+            android:id="@+id/action_MRDetailMoverViewFragment_to_favoriteDeliveryFragment"
+            app:destination="@id/favoriteDeliveryFragment" />
+        <action
+            android:id="@+id/action_MRDetailMoverViewFragment_to_findDeliveryFragment"
+            app:destination="@id/findDeliveryFragment" />
+    </fragment>
     <fragment
         android:id="@+id/moverDashboardFragment"
         android:name="com.wemove.ui.mover.MoverDashboardFragment"

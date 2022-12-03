@@ -3,6 +3,7 @@ package com.wemove.service;
 import com.wemove.model.MRStatusItem;
 import com.wemove.model.MoveRequest;
 import com.wemove.model.MoveRequestDto;
+import com.wemove.model.MoveStatus;
 import com.wemove.model.PriceQuote;
 import com.wemove.model.Review;
 
@@ -34,5 +35,8 @@ public interface IMoverService {
     @GET("/getStatusTimeline")
     public Call<List<MRStatusItem>> getStatusTimeline(@Query("moveRequestId") int moveRequestId);
 
+
+    @POST("/updateMoveRequestStatus")
+    public Call<Void> updateMoveRequestStatus(@Query("moveRequestId") int moveRequestId, @Query("moveStatus") MoveStatus moveStatus);
 
     }

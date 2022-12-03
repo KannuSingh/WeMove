@@ -11,6 +11,7 @@ import com.wemove.model.InventoryItemGroup;
 import com.wemove.model.MRStatusItem;
 import com.wemove.model.MoveRequest;
 import com.wemove.model.MoveRequestDto;
+import com.wemove.model.MoveStatus;
 import com.wemove.model.PriceQuote;
 import com.wemove.model.QuoteStatus;
 import com.wemove.model.UserDetails;
@@ -115,6 +116,30 @@ public class MoverViewModel extends ViewModel {
         _completedMoveRequestsDelivery.setValue(new ArrayList<>());
 
     }
+
+    public void updateMoveStatus(MoveStatus moveStatus){
+        MoverRepository moverRepository = new MoverRepository(_email.getValue(), _password.getValue());
+        Call<Void> request = moverRepository.updateMoveRequestStatus(Integer.parseInt(_selectedMoveRequest.getValue().getMoveRequest().getMoveRequestId()),moveStatus);
+        request.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.isSuccessful()){
+                    Log.i(TAG,"Successfully change the status to :"+moveStatus.name());
+                }
+                else{
+                    Log.i(TAG,"Failed to change the status to :"+moveStatus.name());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.i(TAG,"Failed to change the status to :"+moveStatus.name()+". Some error occurred ");
+
+            }
+        });
+
+    }
     public void setUser( String email, String password,String userDetails){
         _email.setValue(email);
         _password.setValue(password);
@@ -155,6 +180,8 @@ public class MoverViewModel extends ViewModel {
 
     }
 
+
+
     public void getAllMoveRequestDelivery(String email, String password){
         MoverRepository moverRepository = new MoverRepository(email,password);
         Call<List<MoveRequestDto>> moveRequestList = moverRepository.getAllMoveRequestDeliveries();
@@ -174,6 +201,7 @@ public class MoverViewModel extends ViewModel {
             @Override
             public void onFailure(Call<List<MoveRequestDto>> call, Throwable t) {
                 Log.i(TAG, "getAllMoveRequestDelivery:: Failed");
+                Log.e(TAG,t.getMessage());
             }
         });
 
@@ -272,5 +300,16 @@ public class MoverViewModel extends ViewModel {
             }
             _activeMoveRequestsDelivery.setValue(filteredMoveRequests);
         }
+    }
+
+    public boolean verifyQRCodeData(String contents) {
+        if(_selectedMoveRequest!= null && _selectedMoveRequest.getValue().getMoveRequest() !=null) {
+            MoveRequest moveRequest = _selectedMoveRequest.getValue().getMoveRequest();
+            String text = String.format("%s%s%s", moveRequest.getMoveRequestId(), moveRequest.getMoveRequestOwner(), moveRequest.getPickupAddress().getAddress1());
+            Log.i(TAG,"Text : "+text);
+            Log.i(TAG,"Scanned Contents : "+contents);
+            return text.equals(contents);
+        }
+        return false;
     }
 }

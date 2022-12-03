@@ -1,5 +1,6 @@
 package com.wemove.ui.customer;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
@@ -17,6 +18,11 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 
 import com.google.gson.Gson;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.WriterException;
+import com.google.zxing.common.BitMatrix;
+import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.wemove.R;
 import com.wemove.adapters.CustomExpandableListAdapter;
 import com.wemove.adapters.MoveRequestAdapter;
@@ -24,6 +30,7 @@ import com.wemove.adapters.QuotationListAdapter;
 import com.wemove.databinding.FragmentMRDetailCustomerViewBinding;
 import com.wemove.model.MoveRequest;
 import com.wemove.model.MoveRequestDto;
+import com.wemove.model.MoveStatus;
 import com.wemove.model.PriceQuote;
 import com.wemove.viewmodel.CustomerViewModel;
 
@@ -71,6 +78,25 @@ public class MRDetailCustomerViewFragment extends Fragment {
         });
 
         bindAdapter(customerViewModel.getSelectedMoveRequest().getValue().getPriceQuotes());
+
+        if(moveRequest!=null
+        && !moveRequest.getMoveRequestStatus().equals(MoveStatus.CREATED)
+        &&!moveRequest.getMoveRequestStatus().equals(MoveStatus.SUGGESTED)
+        && !moveRequest.getMoveRequestStatus().equals(MoveStatus.CANCELLED)){
+            try {
+                String text = String.format("%s%s%s", moveRequest.getMoveRequestId(), moveRequest.getMoveRequestOwner(), moveRequest.getPickupAddress().getAddress1());
+                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+                BitMatrix bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE, 600, 600);
+
+                BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
+                Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);
+
+                binding.moverOwnerQrCode.setImageBitmap(bitmap);
+            } catch (WriterException e) {
+                e.printStackTrace();
+            }
+
+        }
 
         return binding.getRoot();
     }

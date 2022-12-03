@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -47,6 +48,11 @@ public class MRDetailMoverViewFragment extends Fragment {
     ActivityResultLauncher<ScanOptions> barLauncher = registerForActivityResult(new ScanContract(), result ->{
         if(result.getContents()!= null){
             Log.i(TAG,result.getContents());
+            boolean verificationResult = moverViewModel.verifyQRCodeData(result.getContents());
+            if(verificationResult){
+                Log.i(TAG,"Change Status");
+                moverViewModel.updateMoveStatus(MoveStatus.PICKUP_STARTED);
+            }
         }
     });
 
@@ -115,6 +121,25 @@ public class MRDetailMoverViewFragment extends Fragment {
         }
 
         binding.fabStartPickup.setOnClickListener(this::verifyMoveOwner);
+        binding.fabMoveDelivered.setOnClickListener(view ->{
+            moverViewModel.updateMoveStatus(MoveStatus.FINISHED);
+            Toast.makeText(getContext(), "Status Updated", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(getView()).navigate(R.id.action_MRDetailMoverViewFragment_to_favoriteDeliveryFragment);
+
+        });
+        binding.fabReachedDestination.setOnClickListener(view -> {
+            moverViewModel.updateMoveStatus(MoveStatus.REACHED);
+            Toast.makeText(getContext(), "Status Updated", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(getView()).navigate(R.id.action_MRDetailMoverViewFragment_to_favoriteDeliveryFragment);
+        });
+
+        binding.fabOnRoute.setOnClickListener(view -> {
+            moverViewModel.updateMoveStatus(MoveStatus.ON_ROUTE);
+            Toast.makeText(getContext(), "Status Updated", Toast.LENGTH_SHORT).show();
+            Navigation.findNavController(getView()).navigate(R.id.action_MRDetailMoverViewFragment_to_favoriteDeliveryFragment);
+        });
+
+
 
         final Observer<Boolean> priceQuoteSubmissionResponse = submissionResponse -> {
 
