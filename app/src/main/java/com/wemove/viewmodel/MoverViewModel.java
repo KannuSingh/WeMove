@@ -45,6 +45,10 @@ public class MoverViewModel extends ViewModel {
     private LiveData<List<MoveRequestDto>> myMoveRequestsDelivery;
 
 
+    private MutableLiveData<List<MoveRequestDto>> _myPastMoveRequestsDelivery = new MutableLiveData<>();
+    private LiveData<List<MoveRequestDto>> myPastMoveRequestsDelivery;
+
+
     private MutableLiveData<List<MoveRequestDto>> _completedMoveRequestsDelivery = new MutableLiveData<>();
     private LiveData<List<MoveRequestDto>> completedMoveRequestsDelivery;
 
@@ -72,7 +76,9 @@ public class MoverViewModel extends ViewModel {
     public LiveData<List<MoveRequestDto>> getMyMoveRequestsDelivery() {
         return _myMoveRequestsDelivery;
     }
-
+    public LiveData<List<MoveRequestDto>> getMyPastMoveRequestsDelivery() {
+        return _myPastMoveRequestsDelivery;
+    }
 
 
     public LiveData<List<MoveRequestDto>> getAllMoveRequestsDelivery() {
@@ -215,7 +221,20 @@ public class MoverViewModel extends ViewModel {
             public void onResponse(Call<List<MoveRequestDto>> call, Response<List<MoveRequestDto>> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, ""+response.body());
-                    _myMoveRequestsDelivery.setValue(response.body());
+                    List<MoveRequestDto> myMoveRequests = new ArrayList<>();
+                    List<MoveRequestDto> myPastMoveRequests = new ArrayList<>();
+                    for(MoveRequestDto moveRequestDto : response.body()){
+                        Log.i(TAG, ""+moveRequestDto.getMoveRequest().getMoveRequestStatus());
+                        if(moveRequestDto.getMoveRequest().getMoveRequestStatus().equals(MoveStatus.FINISHED)){
+                            myPastMoveRequests.add(moveRequestDto);
+                        }else{
+                            myMoveRequests.add(moveRequestDto);
+                        }
+                    }
+                    Log.i(TAG,"myMoveRequests:"+myMoveRequests);
+                    Log.i(TAG,"myPastMoveRequests:"+myPastMoveRequests);
+                    _myMoveRequestsDelivery.setValue(myMoveRequests);
+                    _myPastMoveRequestsDelivery.setValue(myPastMoveRequests);
                     //_activeMoveRequestsDelivery.setValue(response.body());
                 }else{
                     Log.i(TAG, ""+response.raw());

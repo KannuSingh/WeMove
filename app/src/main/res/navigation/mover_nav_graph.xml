@@ -27,7 +27,11 @@
         android:id="@+id/pastDeliveryFragment"
         android:name="com.wemove.ui.mover.PastDeliveryFragment"
         android:label="Completed Move Request"
-        tools:layout="@layout/fragment_past_delivery" />
+        tools:layout="@layout/fragment_past_delivery" >
+        <action
+            android:id="@+id/action_pastDeliveryFragment_to_MRDetailMoverViewFragment"
+            app:destination="@id/MRDetailMoverViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/moverProfileFragment"
         android:name="com.wemove.ui.mover.MoverProfileFragment"
@@ -44,6 +48,9 @@
         <action
             android:id="@+id/action_MRDetailMoverViewFragment_to_findDeliveryFragment"
             app:destination="@id/findDeliveryFragment" />
+        <action
+            android:id="@+id/action_MRDetailMoverViewFragment_to_pastDeliveryFragment"
+            app:destination="@id/pastDeliveryFragment" />
     </fragment>
     <fragment
         android:id="@+id/moverDashboardFragment"

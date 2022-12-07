@@ -29,7 +29,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/no_deliveries"
+                        android:id="@+id/no_deliveries_msg"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -40,7 +40,7 @@
                         android:visibility="gone" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/my_deliveries_recycler_view"
+                        android:id="@+id/my_past_deliveries_recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="20dp"

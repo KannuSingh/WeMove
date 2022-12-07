@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.zxing.BarcodeFormat;
@@ -76,6 +78,7 @@ public class MRDetailCustomerViewFragment extends Fragment {
             setListViewHeight(expandableListView,i);
             return false;
         });
+        binding.fabWriteReview.setVisibility(View.GONE);
 
         bindAdapter(customerViewModel.getSelectedMoveRequest().getValue().getPriceQuotes());
 
@@ -97,6 +100,13 @@ public class MRDetailCustomerViewFragment extends Fragment {
             }
 
         }
+        if(moveRequest!=null && moveRequest.getMoveRequestStatus().equals(MoveStatus.FINISHED)){
+            binding.fabWriteReview.setVisibility(View.VISIBLE);
+        }
+
+        binding.fabWriteReview.setOnClickListener(view -> {
+            handleWriteReview();
+        });
 
         return binding.getRoot();
     }
@@ -157,5 +167,21 @@ public class MRDetailCustomerViewFragment extends Fragment {
         bundle.putString("price_quote",gson.toJson(priceQuote));
         //customerViewModel.setSelectedPriceQuote(priceQuote);
         Navigation.findNavController(getView()).navigate(R.id.action_MRDetailCustomerViewFragment_to_reviewAndRatingFragment,bundle);
+    }
+    private void handleWriteReview(){
+        LiveData<PriceQuote> priceQuote = customerViewModel.getAcceptedPriceQuote();
+        if(priceQuote!=null && priceQuote.getValue()!=null){
+            Log.i(TAG,priceQuote.getValue().toString());
+            Bundle bundle = new Bundle();
+            bundle.putString("action","CustomerWriteReviewClicked");
+            Gson gson = new Gson();
+            bundle.putString("price_quote",gson.toJson(priceQuote.getValue()));
+            //customerViewModel.setSelectedPriceQuote(priceQuote);
+            Navigation.findNavController(getView()).navigate(R.id.action_MRDetailCustomerViewFragment_to_reviewAndRatingFragment,bundle);
+        }else{
+            Toast.makeText(getContext(), "Some Error Occurred", Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 }

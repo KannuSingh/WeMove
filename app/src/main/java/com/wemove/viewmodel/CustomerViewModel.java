@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.wemove.model.InventoryItemGroup;
 import com.wemove.model.MoveRequest;
 import com.wemove.model.MoveRequestDto;
+import com.wemove.model.MoveStatus;
 import com.wemove.model.PriceQuote;
 import com.wemove.model.QuoteStatus;
 import com.wemove.model.UserDetails;
@@ -47,15 +48,10 @@ public class CustomerViewModel extends ViewModel {
     private LiveData<MoveRequestDto> selectedMoveRequest;
 
 
-    private MutableLiveData<PriceQuote> _selectedPriceQuote = new MutableLiveData<>();
-    private LiveData<PriceQuote> selectedPriceQuote;
-
-    public LiveData<PriceQuote> getSelectedPriceQuote() {
-        return _selectedPriceQuote;
-    }
-
-    public void setSelectedPriceQuote(PriceQuote selectedPriceQuote) {
-        _selectedPriceQuote.setValue(selectedPriceQuote);
+    private MutableLiveData<PriceQuote> _acceptedPriceQuote = new MutableLiveData<>();
+    private LiveData<PriceQuote> acceptedPriceQuote;
+    public LiveData<PriceQuote> getAcceptedPriceQuote() {
+        return _acceptedPriceQuote;
     }
 
 
@@ -87,7 +83,8 @@ public class CustomerViewModel extends ViewModel {
         _selectedMoveRequest.setValue(selectedMoveRequestDto);
         for(PriceQuote priceQuote:selectedMoveRequestDto.getPriceQuotes()){
             if(priceQuote.getQuoteStatus().equals(QuoteStatus.ACCEPTED)){
-                _selectedPriceQuote.setValue(priceQuote);
+                Log.i(TAG,priceQuote.getMovers().toString());
+                _acceptedPriceQuote.setValue(priceQuote);
             }
         }
     }
@@ -117,8 +114,23 @@ public class CustomerViewModel extends ViewModel {
             public void onResponse(Call<List<MoveRequestDto>> call, Response<List<MoveRequestDto>> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG, "Customer MoveRequests::"+response.body());
-                    _allMoveRequests.setValue(response.body());
-                    _activeMoveRequests.setValue(response.body());
+
+                    List<MoveRequestDto> myActiveMoveRequests = new ArrayList<>();
+                    List<MoveRequestDto> myCompletedMoveRequests = new ArrayList<>();
+                    for(MoveRequestDto moveRequestDto : response.body()){
+                        Log.i(TAG, ""+moveRequestDto.getMoveRequest().getMoveRequestStatus());
+                        if(moveRequestDto.getMoveRequest().getMoveRequestStatus().equals(MoveStatus.FINISHED)){
+                            myCompletedMoveRequests.add(moveRequestDto);
+                        }else{
+                            myActiveMoveRequests.add(moveRequestDto);
+                        }
+                    }
+                    Log.i(TAG,"myActiveMoveRequests:"+myActiveMoveRequests);
+                    Log.i(TAG,"myCompletedMoveRequests:"+myCompletedMoveRequests);
+                    _allMoveRequests.setValue(myActiveMoveRequests);
+                    _activeMoveRequests.setValue(myActiveMoveRequests);
+                    _completedMoveRequests.setValue(myCompletedMoveRequests);
+
                 }else{
                     Log.i(TAG, "Customer MoveRequests::"+response.raw());
                 }

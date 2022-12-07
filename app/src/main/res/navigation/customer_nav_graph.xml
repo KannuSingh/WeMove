@@ -21,7 +21,11 @@
         android:id="@+id/moveRequestHistoryFragment"
         android:name="com.wemove.ui.customer.MoveRequestHistoryFragment"
         android:label="Move Request History"
-        tools:layout="@layout/fragment_move_request_history" />
+        tools:layout="@layout/fragment_move_request_history" >
+        <action
+            android:id="@+id/action_moveRequestHistoryFragment_to_MRDetailCustomerViewFragment"
+            app:destination="@id/MRDetailCustomerViewFragment" />
+    </fragment>
     <fragment
         android:id="@+id/customerProfileFragment"
         android:name="com.wemove.ui.customer.CustomerProfileFragment"
@@ -74,6 +78,9 @@
         <action
             android:id="@+id/action_MRDetailCustomerViewFragment_to_reviewAndRatingFragment"
             app:destination="@id/reviewAndRatingFragment" />
+        <action
+            android:id="@+id/action_MRDetailCustomerViewFragment_to_moveRequestHistoryFragment"
+            app:destination="@id/moveRequestHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewAndRatingFragment"

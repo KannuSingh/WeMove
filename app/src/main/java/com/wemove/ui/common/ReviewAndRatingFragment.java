@@ -60,6 +60,11 @@ public class ReviewAndRatingFragment extends Fragment {
             PriceQuote priceQuote = gson.fromJson(getArguments().getString("price_quote"), PriceQuote.class);
             reviewAndRatingViewModel.setMover(priceQuote.getMovers());
             reviewAndRatingViewModel.setPriceQuote(priceQuote);
+        }else if (getArguments().getString("action") != null && getArguments().getString("action").equals("CustomerWriteReviewClicked")) {
+            Gson gson = new Gson();
+            PriceQuote priceQuote = gson.fromJson(getArguments().getString("price_quote"), PriceQuote.class);
+            reviewAndRatingViewModel.setMover(priceQuote.getMovers());
+            reviewAndRatingViewModel.setPriceQuote(priceQuote);
         }
 
 
