@@ -40,7 +40,7 @@
     <fragment
         android:id="@+id/MRDetailMoverViewFragment"
         android:name="com.wemove.ui.mover.MRDetailMoverViewFragment"
-        android:label="MRDetailMoverViewFragment"
+        android:label="Move Request Details"
         tools:layout="@layout/fragment_m_r_detail_mover_view">
         <action
             android:id="@+id/action_MRDetailMoverViewFragment_to_favoriteDeliveryFragment"

@@ -89,7 +89,7 @@ public class MRDetailCustomerViewFragment extends Fragment {
             try {
                 String text = String.format("%s%s%s", moveRequest.getMoveRequestId(), moveRequest.getMoveRequestOwner(), moveRequest.getPickupAddress().getAddress1());
                 MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
-                BitMatrix bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE, 600, 600);
+                BitMatrix bitMatrix = multiFormatWriter.encode(text, BarcodeFormat.QR_CODE, 800, 800);
 
                 BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
                 Bitmap bitmap = barcodeEncoder.createBitmap(bitMatrix);

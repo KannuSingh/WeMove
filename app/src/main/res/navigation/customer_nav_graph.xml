@@ -73,7 +73,7 @@
     <fragment
         android:id="@+id/MRDetailCustomerViewFragment"
         android:name="com.wemove.ui.customer.MRDetailCustomerViewFragment"
-        android:label="MRDetailCustomerViewFragment"
+        android:label="Move Request Details"
         tools:layout="@layout/fragment_m_r_detail_customer_view" >
         <action
             android:id="@+id/action_MRDetailCustomerViewFragment_to_reviewAndRatingFragment"
@@ -85,7 +85,7 @@
     <fragment
         android:id="@+id/reviewAndRatingFragment"
         android:name="com.wemove.ui.common.ReviewAndRatingFragment"
-        android:label="fragment_review_and_rating"
+        android:label="Mover Details"
         tools:layout="@layout/fragment_review_and_rating" >
         <action
             android:id="@+id/action_reviewAndRatingFragment_to_myMoveRequestsFragment"

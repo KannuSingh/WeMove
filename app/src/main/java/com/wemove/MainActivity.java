@@ -1,6 +1,7 @@
 package com.wemove;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -8,6 +9,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -50,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
         }, 1000);
 
         forgotPasswordViewModel = new ViewModelProvider(this).get(ForgotPasswordViewModel.class);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this,R.color.button_primary)));
 
     }
 
