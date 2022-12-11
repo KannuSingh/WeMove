@@ -79,7 +79,7 @@ public class MoverDashboardActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(nv,navController);
         //NavigationUI.setupActionBarWithNavController(this,navHostFragment.getNavController());
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this,R.color.button_primary)));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this,R.color.blue)));
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
 

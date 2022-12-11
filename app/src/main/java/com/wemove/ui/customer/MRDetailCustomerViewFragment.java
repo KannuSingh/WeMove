@@ -28,8 +28,10 @@ import com.journeyapps.barcodescanner.BarcodeEncoder;
 import com.wemove.R;
 import com.wemove.adapters.CustomExpandableListAdapter;
 import com.wemove.adapters.MoveRequestAdapter;
+import com.wemove.adapters.MoveStatusAdapter;
 import com.wemove.adapters.QuotationListAdapter;
 import com.wemove.databinding.FragmentMRDetailCustomerViewBinding;
+import com.wemove.model.MRStatusItem;
 import com.wemove.model.MoveRequest;
 import com.wemove.model.MoveRequestDto;
 import com.wemove.model.MoveStatus;
@@ -106,6 +108,11 @@ public class MRDetailCustomerViewFragment extends Fragment {
 
         binding.fabWriteReview.setOnClickListener(view -> {
             handleWriteReview();
+        });
+        customerViewModel.getMRStatusList().observe(getViewLifecycleOwner(),mrStatusItems -> {
+            if(mrStatusItems != null){
+                bindAdapterStatus(mrStatusItems);
+            }
         });
 
         return binding.getRoot();
@@ -184,4 +191,17 @@ public class MRDetailCustomerViewFragment extends Fragment {
 
 
     }
+    private void bindAdapterStatus(List<MRStatusItem> mrStatusItems) {
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
+        binding.timelineListView.setLayoutManager(layoutManager);
+        MoveStatusAdapter listAdapter = new MoveStatusAdapter(mrStatusItems, this::onMoveRequestStatusClicked, getContext());
+        binding.timelineListView.setAdapter(listAdapter);
+        Log.i(TAG, "bindAdapter Move Status");
+        listAdapter.notifyDataSetChanged();
+    }
+    private void onMoveRequestStatusClicked(MRStatusItem mrStatusItem){
+        //moverViewModel.setSelectedMoveRequest(moveRequestDto);
+        //Navigation.findNavController(getView()).navigate(R.id.action_favoriteDeliveryFragment_to_MRDetailMoverViewFragment);
+    }
+
 }

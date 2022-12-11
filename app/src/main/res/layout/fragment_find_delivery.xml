@@ -7,7 +7,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingHorizontal="11dp"
-            android:background="@color/card_bg"
+            android:background="@color/blue_10"
             tools:context=".ui.mover.FindDeliveryFragment">
 
 
@@ -16,7 +16,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
-                android:text="Deliveries"
+                android:text="All Available Delivery"
+                android:textStyle="bold"
                 android:textColor="@color/text"
                 android:layout_marginTop="20dp"
                 android:textSize="20sp" />

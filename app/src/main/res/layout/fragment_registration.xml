@@ -10,13 +10,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:context=".ui.onboarding.RegistrationFragment">
-
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="20dp"
+                android:text="Register"
+                android:textAllCaps="true"
+                android:textColor="@color/text"
+                android:textSize="18sp" />
             <ImageView
                 android:id="@+id/loginImage1"
                 android:layout_width="300dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"
+                android:layout_below="@+id/tv_register"
                 android:src="@drawable/registration_image"
                 android:contentDescription="@string/registration_image_desc">
 

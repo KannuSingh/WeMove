@@ -57,7 +57,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:backgroundTint="@color/button_primary"
+                        android:backgroundTint="@color/blue"
                         android:text="@string/add" />
                 </LinearLayout>
 
@@ -137,7 +137,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
-        android:backgroundTint="@color/button_primary"
+        android:backgroundTint="@color/blue"
         android:text="@string/create_request"
         android:visibility="invisible"
         />

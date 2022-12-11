@@ -44,6 +44,7 @@ public class FavoriteDeliveryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_favorite_delivery, container, false);
+        Log.i(TAG,"Fragment Created!");
         SharedPreferences sharedPreferences = requireContext().getSharedPreferences("wemove", Context.MODE_PRIVATE);
         String email = sharedPreferences.getString("email", null);
         String password = sharedPreferences.getString("password", null);

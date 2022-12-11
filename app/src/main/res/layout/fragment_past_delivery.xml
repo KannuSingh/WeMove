@@ -6,8 +6,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:paddingHorizontal="20dp"
-            android:background="@color/card_bg"
+            android:paddingHorizontal="11dp"
+            android:background="@color/blue_10"
             tools:context=".ui.mover.PastDeliveryFragment">
 
 
@@ -15,7 +15,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Deliveries"
+                android:text="Completed Delivery"
+                android:textStyle="bold"
                 android:textColor="@color/text"
                 android:layout_marginTop="20dp"
                 android:textSize="20sp" />

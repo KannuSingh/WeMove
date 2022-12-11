@@ -19,5 +19,5 @@
     <color name="blue">#802196F3</color>
     <color name="blue_10">#332196F3</color>
     <color name="card_bg">#19FAA61F</color>
-    <color name="rating_normal_star">#8DFAA61F</color>
+    <color name="rating_normal_star">#802180F3</color>
 </resources>

@@ -124,7 +124,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="2dp"
-                        android:backgroundTint="@color/button_primary"
+                        android:backgroundTint="@color/blue"
                         android:text="@string/select"
                         android:textColor="#5D4037" />
                 </LinearLayout>
@@ -151,6 +151,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="3dp"
                         android:checked="true"
+                        android:buttonTint="@color/blue"
                         android:text="@string/no_help_needed_ndriver_will_drive_only_driver_will_not_load_or_unload_your_items"
                         android:textColor="@color/text">
 
@@ -161,6 +162,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="3dp"
+                        android:buttonTint="@color/blue"
                         android:text="@string/driver_helping_ndriver_will_load_and_unload_your_items"
                         android:textColor="@color/text">
 
@@ -172,6 +174,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="3dp"
+                        android:buttonTint="@color/blue"
                         android:text="@string/driver_helping_1_helper_ndriver_with_one_other_helper_will_load_and_unload_your_items"
                         android:textColor="@color/text">
 
@@ -182,6 +185,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="3dp"
+                        android:buttonTint="@color/blue"
                         android:text="@string/driver_helping_2_helper_ndriver_with_two_other_helpers_will_load_and_unload_your_items"
                         android:textColor="@color/text">
 
@@ -195,7 +199,7 @@
                 android:layout_gravity="center"
                 android:layout_marginVertical="15dp"
                 android:layout_marginTop="-600dp"
-                android:backgroundTint="@color/button_primary"
+                android:backgroundTint="@color/blue"
                 android:text="@string/next"
                 android:textColor="#5D4037" />
 

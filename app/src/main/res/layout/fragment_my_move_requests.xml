@@ -5,7 +5,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/card_bg">
+    android:background="@color/blue_10">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -89,7 +89,7 @@
         android:layout_gravity="end"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/button_primary"
+        android:backgroundTint="@color/blue"
         android:src="@drawable/ic_baseline_playlist_add_24"
         app:fabSize="normal"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -37,10 +37,10 @@ public class CustomerDashboardActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this,navHostFragment.getNavController());
 
         BottomNavigationView bnv = binding.customerBottomNavigationView;
-        bnv.setBackgroundColor(ContextCompat.getColor(this,R.color.button_primary));
+        bnv.setBackgroundColor(ContextCompat.getColor(this,R.color.blue));
         NavigationUI.setupWithNavController(bnv,navController);
 
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this,R.color.button_primary)));
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this,R.color.blue)));
 
         customerViewModel = new ViewModelProvider(this).get(CustomerViewModel.class);
         setLoggedInUser();

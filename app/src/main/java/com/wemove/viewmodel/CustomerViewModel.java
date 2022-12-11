@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.gson.Gson;
 import com.wemove.model.InventoryItemGroup;
+import com.wemove.model.MRStatusItem;
 import com.wemove.model.MoveRequest;
 import com.wemove.model.MoveRequestDto;
 import com.wemove.model.MoveStatus;
@@ -16,6 +17,7 @@ import com.wemove.model.QuoteStatus;
 import com.wemove.model.UserDetails;
 import com.wemove.network.RetrofitClientInstance;
 import com.wemove.repository.CustomerRepository;
+import com.wemove.repository.MoverRepository;
 import com.wemove.service.ICustomerService;
 
 import java.util.ArrayList;
@@ -54,7 +56,13 @@ public class CustomerViewModel extends ViewModel {
         return _acceptedPriceQuote;
     }
 
+    private MutableLiveData<List<MRStatusItem>> _mrStatusList = new MutableLiveData<>();
+    private LiveData<List<MRStatusItem>> mrStatusList ;
 
+    public LiveData<List<MRStatusItem>> getMRStatusList() {
+        this.mrStatusList = _mrStatusList;
+        return mrStatusList;
+    }
 
 
     private MutableLiveData<String> _email = new MutableLiveData<>();
@@ -79,6 +87,28 @@ public class CustomerViewModel extends ViewModel {
         return _selectedMoveRequest;
     }
 
+    private void getStatusTimeLine(String moveRequestId){
+        MoverRepository moverRepository = new MoverRepository(_email.getValue(), _password.getValue());
+        Call<List<MRStatusItem>> statusTimeline = moverRepository.getStatusTimeline(Integer.parseInt(moveRequestId));
+        statusTimeline.enqueue(new Callback<List<MRStatusItem>>() {
+            @Override
+            public void onResponse(Call<List<MRStatusItem>> call, Response<List<MRStatusItem>> response) {
+                if(response.isSuccessful()){
+                    _mrStatusList.setValue(response.body());
+                }
+                else{
+                    _mrStatusList.setValue(new ArrayList<>());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<MRStatusItem>> call, Throwable t) {
+                _mrStatusList.setValue(new ArrayList<>());
+            }
+        });
+
+    }
+
     public void setSelectedMoveRequest(MoveRequestDto selectedMoveRequestDto) {
         _selectedMoveRequest.setValue(selectedMoveRequestDto);
         for(PriceQuote priceQuote:selectedMoveRequestDto.getPriceQuotes()){
@@ -87,6 +117,7 @@ public class CustomerViewModel extends ViewModel {
                 _acceptedPriceQuote.setValue(priceQuote);
             }
         }
+        getStatusTimeLine(_selectedMoveRequest.getValue().getMoveRequest().getMoveRequestId());
     }
 
     public CustomerViewModel(){

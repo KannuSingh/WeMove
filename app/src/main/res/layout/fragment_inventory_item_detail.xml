@@ -343,7 +343,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginVertical="10dp"
-                    android:backgroundTint="@color/button_primary"
+                    android:backgroundTint="@color/blue"
+
                     android:text="Add"/>
 
 
