@@ -114,6 +114,13 @@ public class MoverViewModel extends ViewModel {
         return priceQuoteSubmitResponseFlag;
     }
 
+    private MutableLiveData<MoveStatus> _selectedMoveRequestStatus = new MutableLiveData<>();
+    private LiveData<MoveStatus> selectedMoveRequestStatus ;
+
+    public LiveData<MoveStatus> getSelectedMoveRequestStatus(){
+        return _selectedMoveRequestStatus;
+    }
+
 
 
     public MoverViewModel(){
@@ -131,6 +138,8 @@ public class MoverViewModel extends ViewModel {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()){
                     Log.i(TAG,"Successfully change the status to :"+moveStatus.name());
+                    _selectedMoveRequestStatus.setValue(moveStatus);
+                    _selectedMoveRequest.getValue().getMoveRequest().setMoveRequestStatus(moveStatus);
                 }
                 else{
                     Log.i(TAG,"Failed to change the status to :"+moveStatus.name());
@@ -144,6 +153,7 @@ public class MoverViewModel extends ViewModel {
 
             }
         });
+        getStatusTimeLine(_selectedMoveRequest.getValue().getMoveRequest().getMoveRequestId());
 
     }
     public void setUser( String email, String password,String userDetails){
@@ -158,6 +168,7 @@ public class MoverViewModel extends ViewModel {
     public void setSelectedMoveRequest(MoveRequestDto selectedMoveRequestDto) {
         Log.i(TAG, "Setting selectedMoveRequestDto");
         _selectedMoveRequest.setValue(selectedMoveRequestDto);
+        _selectedMoveRequestStatus.setValue(selectedMoveRequestDto.getMoveRequest().getMoveRequestStatus());
         _priceQuoteSubmitResponseFlag.setValue(null);
         _userPriceQuote.setValue(null);
         for (PriceQuote priceQuote:selectedMoveRequestDto.getPriceQuotes()) {
@@ -165,8 +176,14 @@ public class MoverViewModel extends ViewModel {
                 _userPriceQuote.setValue(priceQuote);
             }
         }
+
+        getStatusTimeLine(_selectedMoveRequest.getValue().getMoveRequest().getMoveRequestId());
+
+    }
+
+    private void getStatusTimeLine(String moveRequestId){
         MoverRepository moverRepository = new MoverRepository(_email.getValue(), _password.getValue());
-        Call<List<MRStatusItem>> statusTimeline = moverRepository.getStatusTimeline(Integer.parseInt(_selectedMoveRequest.getValue().getMoveRequest().getMoveRequestId()));
+        Call<List<MRStatusItem>> statusTimeline = moverRepository.getStatusTimeline(Integer.parseInt(moveRequestId));
         statusTimeline.enqueue(new Callback<List<MRStatusItem>>() {
             @Override
             public void onResponse(Call<List<MRStatusItem>> call, Response<List<MRStatusItem>> response) {

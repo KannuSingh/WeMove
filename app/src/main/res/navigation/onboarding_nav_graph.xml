@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/onboarding_nav_graph"
-    app:startDestination="@id/splashScreenFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/loginFragment"
@@ -14,14 +14,14 @@
             app:destination="@id/registrationFragment"
             app:popUpTo="@id/loginFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
-            app:destination="@id/forgotPasswordFragment" />
-        <action
             android:id="@+id/action_loginFragment_to_customerDashboardActivity"
             app:destination="@id/customerDashboardActivity" />
         <action
             android:id="@+id/action_loginFragment_to_moverDashboardActivity"
             app:destination="@id/moverDashboardActivity" />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordActivity"
+            app:destination="@id/forgotPasswordActivity" />
     </fragment>
     <fragment
         android:id="@+id/registrationFragment"
@@ -31,52 +31,6 @@
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/splashScreenFragment"
-        android:name="com.wemove.ui.onboarding.SplashScreenFragment"
-        android:label="WeMove" >
-        <action
-            android:id="@+id/action_splashScreenFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-        <action
-            android:id="@+id/action_splashScreenFragment_to_moverDashboardActivity"
-            app:destination="@id/moverDashboardActivity" />
-        <action
-            android:id="@+id/action_splashScreenFragment_to_customerDashboardActivity"
-            app:destination="@id/customerDashboardActivity" />
-    </fragment>
-    <fragment
-        android:id="@+id/changePasswordFragment"
-        android:name="com.wemove.ui.onboarding.ChangePasswordFragment"
-        android:label="ChangePassword" >
-        <action
-            android:id="@+id/action_changePasswordFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/forgotPasswordFragment"
-        android:name="com.wemove.ui.onboarding.ForgotPasswordFragment"
-        android:label="ForgotPassword" >
-        <action
-            android:id="@+id/action_forgotPasswordFragment_to_securityQuestionFragment"
-            app:destination="@id/securityQuestionFragment" />
-        <action
-            android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/loginFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/securityQuestionFragment"
-        android:name="com.wemove.ui.onboarding.SecurityQuestionFragment"
-        android:label="SecurityQuestion" >
-        <action
-            android:id="@+id/action_securityQuestionFragment_to_changePasswordFragment"
-            app:destination="@id/changePasswordFragment" />
-        <action
-            android:id="@+id/action_securityQuestionFragment_to_loginFragment"
-            app:destination="@id/loginFragment"
-            app:popUpTo="@id/loginFragment" />
-    </fragment>
     <activity
         android:id="@+id/customerDashboardActivity"
         android:name="com.wemove.ui.customer.CustomerDashboardActivity"
@@ -85,4 +39,9 @@
         android:id="@+id/moverDashboardActivity"
         android:name="com.wemove.ui.mover.MoverDashboardActivity"
         android:label="MoverDashboardActivity" />
+    <activity
+        android:id="@+id/forgotPasswordActivity"
+        android:name="com.wemove.ui.onboarding.ForgotPasswordActivity"
+        android:label="activity_forgot_password"
+        tools:layout="@layout/activity_forgot_password" />
 </navigation>

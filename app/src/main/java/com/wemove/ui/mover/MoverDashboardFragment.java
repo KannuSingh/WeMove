@@ -21,10 +21,6 @@ public class MoverDashboardFragment extends Fragment {
     private FragmentMoverDashboardBinding binding;
 
 
-
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

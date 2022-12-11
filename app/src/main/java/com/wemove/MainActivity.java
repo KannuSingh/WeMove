@@ -19,7 +19,6 @@ import com.wemove.viewmodel.MoverViewModel;
 
 public class MainActivity extends AppCompatActivity {
     private final String TAG = "MainActivity";
-    private ForgotPasswordViewModel forgotPasswordViewModel;
     private NavController navController;
 
     @Override
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.view_onboarding_container);
         navController = navHostFragment.getNavController();
 
-        NavigationUI.setupActionBarWithNavController(this, navHostFragment.getNavController());
+       // NavigationUI.setupActionBarWithNavController(this, navHostFragment.getNavController());
 
 
         new Handler().postDelayed(new Runnable() {
@@ -38,21 +37,19 @@ public class MainActivity extends AppCompatActivity {
                 if (isUserLoggedIn()) {
                     String userType = getLoggedInUserType();
                     if ("CUSTOMER".equals(userType)) {
-                        navController.navigate(R.id.action_splashScreenFragment_to_customerDashboardActivity);
+                        navController.navigate(R.id.action_loginFragment_to_customerDashboardActivity);
                     } else if ("MOVER".equals(userType)) {
-                        navController.navigate(R.id.action_splashScreenFragment_to_moverDashboardActivity);
+                        navController.navigate(R.id.action_loginFragment_to_moverDashboardActivity);
                     }
 
                     Log.i(TAG, "User_type : " + userType);
                     //Get User details and show appropriate activity
-                } else {
-                    navController.navigate(R.id.action_splashScreenFragment_to_loginFragment);
                 }
             }
         }, 1000);
 
-        forgotPasswordViewModel = new ViewModelProvider(this).get(ForgotPasswordViewModel.class);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this,R.color.button_primary)));
+        getSupportActionBar().hide();
+       // getSupportActionBar().setBackgroundDrawable(new ColorDrawable(ContextCompat.getColor(this,R.color.button_primary)));
 
     }
 

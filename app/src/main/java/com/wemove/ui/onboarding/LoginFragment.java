@@ -114,7 +114,7 @@ public class LoginFragment extends Fragment {
         binding.buttonLogin.setOnClickListener(v -> onLogin());
 
         binding.buttonRegister.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_registrationFragment));
-        binding.buttonForgotPassword.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_forgotPasswordFragment));
+        binding.buttonForgotPassword.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_loginFragment_to_forgotPasswordActivity));
 
     }
 

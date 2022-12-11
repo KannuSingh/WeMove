@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:backgroundTint="@color/red"
+            android:backgroundTint="@color/red_40"
             android:layout_gravity="start"
             android:layout_marginEnd="4dp"
             android:text="Decline"
@@ -159,12 +159,11 @@
 
             />
         <Button
+            android:id="@+id/btn_submit_review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/user_rating"
             android:backgroundTint="@color/button_primary"
             android:text="submit"
-            android:layout_centerHorizontal="true"
             />
     </LinearLayout>
 

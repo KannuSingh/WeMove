@@ -53,7 +53,7 @@ public class ReviewAndRatingFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        reviewAndRatingViewModel = new ViewModelProvider(requireActivity()).get(MoverReviewAndRatingViewModel.class);
+        reviewAndRatingViewModel = new ViewModelProvider(this).get(MoverReviewAndRatingViewModel.class);
         setLoggedInUser();
         if (getArguments().getString("action") != null && getArguments().getString("action").equals("CustomerPriceQuoteClicked")) {
             Gson gson = new Gson();
@@ -101,9 +101,11 @@ public class ReviewAndRatingFragment extends Fragment {
             } else {
                 binding.approvePriceQuoteLayout.setVisibility(View.GONE);
             }
+        }else if (getArguments().getString("action") != null
+                && getArguments().getString("action").equals("CustomerWriteReviewClicked")) {
+            binding.approvePriceQuoteLayout.setVisibility(View.GONE);
         }
-
-        final Observer<Boolean> approveDeclineStatus = approveOrDecline -> {
+            final Observer<Boolean> approveDeclineStatus = approveOrDecline -> {
             Log.i(TAG, "" + approveOrDecline);
             if (approveOrDecline) {
                 Toast.makeText(getContext(), "Price Quote Status Updated", Toast.LENGTH_SHORT).show();
@@ -120,7 +122,25 @@ public class ReviewAndRatingFragment extends Fragment {
 
         };
 
+        reviewAndRatingViewModel.getReviewPostingStatus().observe(getViewLifecycleOwner(),postingStatusResult ->{
+            if (postingStatusResult) {
+                Toast.makeText(getContext(), "Review Posted Successfully", Toast.LENGTH_SHORT).show();
+                NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.customer_fragments_view_container);
+                NavController navController = navHostFragment.getNavController();
+                navController.navigateUp();
+            } else {
+                Toast.makeText(getContext(), "Some Error Occurred", Toast.LENGTH_SHORT).show();
+            }
+        } );
+
         reviewAndRatingViewModel.getApproveOrDeclineStatus().observe(getViewLifecycleOwner(), approveDeclineStatus);
+
+        binding.btnSubmitReview.setOnClickListener(view -> {
+            String review = binding.etReview.getText().toString();
+            float rating = binding.userRating.getRating();
+            reviewAndRatingViewModel.addReview(review,rating);
+
+        });
 
         binding.btnApprovePriceQuote.setOnClickListener(view -> {
             Gson gson = new Gson();

@@ -25,7 +25,7 @@
             android:layout_height="350dp"
             android:layout_below="@+id/tv_login"
             android:contentDescription="@string/login_image_desc"
-            android:src="@drawable/register1">
+            android:src="@drawable/login_image">
 
         </ImageView>
 
@@ -76,7 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tfl_password"
             android:layout_centerInParent="true"
-            android:backgroundTint="@color/button_primary"
+            android:backgroundTint="@color/blue"
             android:text="@string/login"
             android:textSize="18sp" />
 

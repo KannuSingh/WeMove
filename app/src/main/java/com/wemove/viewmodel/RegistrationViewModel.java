@@ -27,35 +27,31 @@ public class RegistrationViewModel extends ViewModel {
     private MutableLiveData<Boolean>  _registerFlag = new MutableLiveData<Boolean>();
     private LiveData<Boolean> registerFlag;
 
-
     public LiveData<Boolean> isRegisterFlag() {
         return _registerFlag;
     }
 
-
-
-    public boolean registerUser() {
-        return true;
-    }
-
-    public boolean onRegistration(UserDetails userDetails) {
+    public void onRegistration(UserDetails userDetails) {
         Log.i(TAG,"onRegistration");
         IUserOnboardingService onboardingService = RetrofitClientInstance.createService(IUserOnboardingService.class);
-
         onboardingService.register(userDetails).enqueue(new Callback<UserDetails>() {
             @Override
             public void onResponse(Call<UserDetails> call, Response<UserDetails> response) {
                 if(response.isSuccessful()) {
-                    Log.i("Registration Response :", response.body().toString());
+                    if(response.body() != null) {
+                        _registerFlag.setValue(true);
+                    }else{
+                        _registerFlag.setValue(false);
+                    }
+                    Log.i("RegistrationFragment:", response.body().toString());
                 }
             }
 
             @Override
             public void onFailure(Call<UserDetails> call, Throwable t) {
-                Log.i("Registration Failed :", t.toString());
-
+                Log.i("RegistrationFragment", t.toString());
+                _registerFlag.setValue(false);
             }
         });
-        return true;
     }
 }

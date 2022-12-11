@@ -39,7 +39,6 @@ public class CustomerProfileFragment extends Fragment {
         Log.d("CustomerProfileFragment", "CustomerProfileFragment created/re-created!");
         binding.etEmail.setText(customerViewModel.getUserDetails().getValue().getEmail());
         binding.etMobile.setText(customerViewModel.getUserDetails().getValue().getMobile());
-        binding.etCity.setText(customerViewModel.getUserDetails().getValue().getAddress().getCity());
         binding.etName.setText(customerViewModel.getUserDetails().getValue().getFirstname());
 
         binding.logout.setOnClickListener(new View.OnClickListener() {

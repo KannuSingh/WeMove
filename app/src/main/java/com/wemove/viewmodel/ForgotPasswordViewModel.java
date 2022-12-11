@@ -37,9 +37,7 @@ public class ForgotPasswordViewModel extends ViewModel {
         return _fpResetPasswordFlag;
     }
 
-    public void getSecurityQuestion(String email){
 
-    }
 
     public ForgotPasswordViewModel(){
         Log.d(TAG,"ForgotPasswordViewModel Created ");
@@ -47,7 +45,7 @@ public class ForgotPasswordViewModel extends ViewModel {
 
 
 
-    public void forgotPassword(String email){
+    public void getSecurityQuestion(String email){
         OnboardingRepository onboardingRepository = new OnboardingRepository();
         Call<SecurityQuestionDto> securityQuestion = onboardingRepository.forgotPassword(email);
         Log.i(TAG,"forgotPassword for email:"+email);
@@ -74,22 +72,32 @@ public class ForgotPasswordViewModel extends ViewModel {
         });
     }
 
-    public void resetPassword(ResetPasswordDAO resetPasswordDAO){
+    public void resetPassword(String newPassword, String confirmPassword, String securityAnswer){
+
+        ResetPasswordDAO resetPasswordDAO = new ResetPasswordDAO();
+        resetPasswordDAO.setNewPassword(newPassword);
+        resetPasswordDAO.setSecurityQuestion(_fpSecurityQuestion.getValue());
+        resetPasswordDAO.setSecretAnswer(securityAnswer);
+        resetPasswordDAO.setEmail(getFpEmail().getValue());
+
         OnboardingRepository onboardingRepository = new OnboardingRepository();
         Call<Boolean> resetPassword = onboardingRepository.resetPassword(resetPasswordDAO);
         resetPassword.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(response.isSuccessful()){
+                    Log.i(TAG, String.valueOf(response.body()));
                     _fpResetPasswordFlag.setValue(response.body());
 
                 }else {
+                    Log.i(TAG, String.valueOf(response.body()));
                     _fpResetPasswordFlag.setValue(false);
                 }
             }
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
+                Log.i(TAG, String.valueOf(t.getMessage()));
                 _fpResetPasswordFlag.setValue(false);
             }
         });

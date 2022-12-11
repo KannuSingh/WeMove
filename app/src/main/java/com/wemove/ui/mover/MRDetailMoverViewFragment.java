@@ -19,6 +19,7 @@ import android.widget.ExpandableListAdapter;
 import android.widget.ExpandableListView;
 import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 import com.journeyapps.barcodescanner.ScanContract;
 import com.journeyapps.barcodescanner.ScanOptions;
 import com.wemove.R;
@@ -51,7 +52,10 @@ public class MRDetailMoverViewFragment extends Fragment {
             boolean verificationResult = moverViewModel.verifyQRCodeData(result.getContents());
             if(verificationResult){
                 Log.i(TAG,"Change Status");
+                Toast.makeText(getContext(), "Verification Successful : Status updated to PICKUP STARTED", Toast.LENGTH_LONG).show();
                 moverViewModel.updateMoveStatus(MoveStatus.PICKUP_STARTED);
+            }else{
+                Toast.makeText(getContext(), "Incorrect QR :Verification Failed", Toast.LENGTH_LONG).show();
             }
         }
     });
@@ -87,6 +91,10 @@ public class MRDetailMoverViewFragment extends Fragment {
         binding.tvMoveRequestStatus.setText(moveRequest.getMoveRequestStatus().name());
         //binding.moveQuoteCount.setText(priceQuotes.size());
 
+
+
+
+
         Log.i(TAG,"Getting expandableListDetail");
         HashMap<String, List<String>> expandableListDetail = moverViewModel.getInventoryDataOfSelectedMoveRequest();
         List<String> expandableListTitle = new ArrayList<String>(expandableListDetail.keySet());
@@ -109,14 +117,13 @@ public class MRDetailMoverViewFragment extends Fragment {
         } else {
             binding.quotationFormLayout.setVisibility(View.VISIBLE);
         }
-
-        if(moveRequest.getMoveRequestStatus().equals(MoveStatus.ACCEPTED) && _selectedMRUserPriceQuote.getQuoteStatus().equals(QuoteStatus.ACCEPTED)) {
+        if(moverViewModel.getSelectedMoveRequestStatus().getValue().equals(MoveStatus.ACCEPTED) && _selectedMRUserPriceQuote.getQuoteStatus().equals(QuoteStatus.ACCEPTED)) {
             binding.fabStartPickup.setVisibility(View.VISIBLE);
-        }else if(moveRequest.getMoveRequestStatus().equals(MoveStatus.PICKUP_STARTED)){
+        }else if(moverViewModel.getSelectedMoveRequestStatus().getValue().equals(MoveStatus.PICKUP_STARTED)){
             binding.fabOnRoute.setVisibility(View.VISIBLE);
-        }else if(moveRequest.getMoveRequestStatus().equals(MoveStatus.ON_ROUTE)){
+        }else if(moverViewModel.getSelectedMoveRequestStatus().getValue().equals(MoveStatus.ON_ROUTE)){
             binding.fabReachedDestination.setVisibility(View.VISIBLE);
-        }else if(moveRequest.getMoveRequestStatus().equals(MoveStatus.REACHED)){
+        }else if(moverViewModel.getSelectedMoveRequestStatus().getValue().equals(MoveStatus.REACHED)){
             binding.fabMoveDelivered.setVisibility(View.VISIBLE);
         }
 
@@ -139,7 +146,12 @@ public class MRDetailMoverViewFragment extends Fragment {
             Navigation.findNavController(getView()).navigate(R.id.action_MRDetailMoverViewFragment_to_favoriteDeliveryFragment);
         });
 
-
+        final Observer<MoveStatus> moveRequestStatusUpdate = moveStatus -> {
+            if(moveStatus != null){
+                binding.tvMoveRequestStatus.setText(moveStatus.name());
+            }
+        };
+        moverViewModel.getSelectedMoveRequestStatus().observe(getViewLifecycleOwner(),moveRequestStatusUpdate);
 
         final Observer<Boolean> priceQuoteSubmissionResponse = submissionResponse -> {
 
@@ -204,7 +216,7 @@ public class MRDetailMoverViewFragment extends Fragment {
     private void bindAdapter(List<MRStatusItem> mrStatusItems) {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         binding.timelineListView.setLayoutManager(layoutManager);
-        MoveStatusAdapter listAdapter = new MoveStatusAdapter(mrStatusItems, this::onMoveRequestStatusClicked);
+        MoveStatusAdapter listAdapter = new MoveStatusAdapter(mrStatusItems, this::onMoveRequestStatusClicked, getContext());
         binding.timelineListView.setAdapter(listAdapter);
         Log.i(TAG, "bindAdapter Move Status");
         listAdapter.notifyDataSetChanged();

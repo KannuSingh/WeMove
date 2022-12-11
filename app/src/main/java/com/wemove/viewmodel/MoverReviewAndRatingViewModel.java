@@ -35,10 +35,7 @@ public class MoverReviewAndRatingViewModel extends ViewModel {
         priceQuote = _priceQuote;
         return priceQuote;
     }
-    public void setPriceQuote(PriceQuote priceQuote) {
-        this._priceQuote.setValue(priceQuote);
-        _approveOrDeclineStatus = new MutableLiveData<>();;
-    }
+
 
 
     public LiveData<UserDetails> getMoverUserDetails() {
@@ -49,6 +46,19 @@ public class MoverReviewAndRatingViewModel extends ViewModel {
     private MutableLiveData<Boolean> _approveOrDeclineStatus = new MutableLiveData<>();
     private LiveData<Boolean> approveOrDeclineStatus ;
 
+    private MutableLiveData<Boolean> _reviewPostingStatus = new MutableLiveData<>();
+    private LiveData<Boolean> reviewPostingStatus ;
+
+    public LiveData<Boolean> getReviewPostingStatus(){
+        reviewPostingStatus = _reviewPostingStatus;
+        return reviewPostingStatus;
+    }
+
+
+    public void setPriceQuote(PriceQuote priceQuote) {
+        this._priceQuote.setValue(priceQuote);
+        _approveOrDeclineStatus = new MutableLiveData<>();
+    }
     public LiveData<Boolean> getApproveOrDeclineStatus() {
         this.approveOrDeclineStatus = _approveOrDeclineStatus;
         return approveOrDeclineStatus;
@@ -61,14 +71,14 @@ public class MoverReviewAndRatingViewModel extends ViewModel {
 
     private MutableLiveData<List<Review>> _moverReviews = new MutableLiveData<>();
 
-   private LiveData<List<Review>> moverReviews ;
+    private LiveData<List<Review>> moverReviews ;
+
+
 
     public LiveData<List<Review>> getMoverReviews() {
         moverReviews = _moverReviews;
         return moverReviews;
     }
-
-
 
     public void setViewingUserDetails(UserDetails userDetails) {
         _viewingUserDetails.setValue(userDetails);
@@ -78,6 +88,7 @@ public class MoverReviewAndRatingViewModel extends ViewModel {
             _moverUserDetails.setValue(movers);
             getReviewAndRating(movers.getEmail());
     }
+
 
     private void getReviewAndRating(String email) {
         MoverRepository moverRepository = new MoverRepository(_viewingUserDetails.getValue().getEmail(),_viewingUserDetails.getValue().getPassword());
@@ -154,6 +165,40 @@ public class MoverReviewAndRatingViewModel extends ViewModel {
             @Override
             public void onFailure(Call<Boolean> call, Throwable t) {
                 setApproveOrDeclineStatus(false);
+            }
+        });
+    }
+
+    public void addReview(String reviewString, float rating){
+        Review postingReview = new Review();
+        postingReview.setReview(reviewString);
+        postingReview.setRating(rating);
+        postingReview.setMoverEmail(_moverUserDetails.getValue().getEmail());
+        postingReview.setCustomerEmail(_viewingUserDetails.getValue().getEmail());
+        postingReview.setMoveRequestId(String.valueOf(_priceQuote.getValue().getMoveRequestId()));
+
+        CustomerRepository customerRepository = new CustomerRepository(_viewingUserDetails.getValue().getEmail(),_viewingUserDetails.getValue().getPassword());
+        Call<Review> reviewResult = customerRepository.addReview(postingReview);
+        reviewResult.enqueue(new Callback<Review>() {
+            @Override
+            public void onResponse(Call<Review> call, Response<Review> response) {
+                if(response.isSuccessful()){
+                    if(response.body() != null){
+                        _reviewPostingStatus.setValue(true);
+                        getReviewAndRating(_moverUserDetails.getValue().getEmail());
+                        getAvgRating();
+
+                    }else{
+                        _reviewPostingStatus.setValue(false);
+                    }
+                }else{
+                    _reviewPostingStatus.setValue(false);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Review> call, Throwable t) {
+                _reviewPostingStatus.setValue(false);
             }
         });
     }

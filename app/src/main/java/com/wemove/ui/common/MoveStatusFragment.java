@@ -1,4 +1,4 @@
-package com.wemove.ui.onboarding;
+package com.wemove.ui.common;
 
 import android.os.Bundle;
 
@@ -11,20 +11,21 @@ import android.view.ViewGroup;
 import com.wemove.R;
 
 
-public class ChangePasswordFragment extends Fragment {
-    private String TAG = "ChangePasswordFragment";
+public class MoveStatusFragment extends Fragment {
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
 
+        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_change_password, container, false);
+        return inflater.inflate(R.layout.fragment_move_status, container, false);
     }
 }

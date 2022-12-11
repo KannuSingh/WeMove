@@ -41,7 +41,6 @@ public class MoverProfileFragment extends Fragment {
 
         binding.etEmail.setText(moverViewModel.getUserDetails().getValue().getEmail());
         binding.etMobile.setText(moverViewModel.getUserDetails().getValue().getMobile());
-        binding.etCity.setText(moverViewModel.getUserDetails().getValue().getAddress().getCity());
         binding.etName.setText(moverViewModel.getUserDetails().getValue().getFirstname());
 
 

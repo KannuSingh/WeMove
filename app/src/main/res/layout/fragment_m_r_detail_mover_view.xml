@@ -10,6 +10,7 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginBottom="60dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -236,7 +237,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginHorizontal="2dp"
-                                android:backgroundTint="@color/button_primary"
+                                android:backgroundTint="@color/green"
                                 android:text="submit"
                                 android:textColor="#5D4037" />
                         </LinearLayout>
@@ -336,6 +337,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="11dp"
             android:layout_marginBottom="6dp"
+            android:backgroundTint="@color/blue"
             />
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_on_route"
@@ -348,6 +350,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="11dp"
             android:layout_marginBottom="6dp"
+            android:backgroundTint="@color/blue"
             />
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_reached_destination"
@@ -360,6 +363,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="11dp"
             android:layout_marginBottom="6dp"
+            android:backgroundTint="@color/blue"
             />
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/fab_move_delivered"
@@ -372,6 +376,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="11dp"
             android:layout_marginBottom="6dp"
+            android:backgroundTint="@color/blue"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -31,16 +31,9 @@ public class ForgotPasswordFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        forgotPasswordViewModel  = new ViewModelProvider(this).get(ForgotPasswordViewModel.class);
+        forgotPasswordViewModel  = new ViewModelProvider(getActivity()).get(ForgotPasswordViewModel.class);
 
-        final Observer<String> securityQuestionObserver = new Observer<String>() {
-            @Override
-            public void onChanged(String securityQuestion) {
-                Log.i(TAG,"securityQuestionObserver : "+securityQuestion);
-                Navigation.findNavController(getView()).navigate(R.id.action_forgotPasswordFragment_to_securityQuestionFragment);
-            }
-        };
-        forgotPasswordViewModel.getFpSecurityQuestion().observe(this.getActivity(),securityQuestionObserver);
+
     }
 
     @Override
@@ -48,9 +41,6 @@ public class ForgotPasswordFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_forgot_password, container, false);
-
-
-
         return binding.getRoot();
     }
 
@@ -63,14 +53,23 @@ public class ForgotPasswordFragment extends Fragment {
             Log.i(TAG,"Proceed Button Clicked");
             if(binding.etEmail.getText() != null || binding.etEmail.getText().toString()!=""){
                 Log.i(TAG,"Calling forgotPassword ");
-                forgotPasswordViewModel.forgotPassword(binding.etEmail.getText().toString());
+                forgotPasswordViewModel.getSecurityQuestion(binding.etEmail.getText().toString());
             }
             else{
-                Toast.makeText(getContext(),"Please enter email address",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Please enter valid email address",Toast.LENGTH_SHORT).show();
             }
         });
 
-        binding.buttonCancel.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_forgotPasswordFragment_to_loginFragment));
+        final Observer<String> securityQuestionObserver = new Observer<String>() {
+            @Override
+            public void onChanged(String securityQuestion) {
+                Log.i(TAG,"securityQuestionObserver : "+securityQuestion);
+                Navigation.findNavController(getView()).navigate(R.id.action_forgotPasswordFragment2_to_securityQuestionFragment2);
+            }
+        };
+        forgotPasswordViewModel.getFpSecurityQuestion().observe(this.getActivity(),securityQuestionObserver);
+
+        binding.buttonCancel.setOnClickListener(v -> Navigation.findNavController(v).navigate(R.id.action_forgotPasswordFragment2_to_mainActivity));
     }
 
 

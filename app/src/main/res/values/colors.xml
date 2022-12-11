@@ -14,8 +14,10 @@
     <color name="highlight_background">#0C3469</color>
     <color name="text">#0C3469</color>
     <color name="splash_background">#F7941D</color>
-    <color name="red">#FF0000</color>
-    <color name="green">#32CD32</color>
+    <color name="red_40">#66FF0000</color>
+    <color name="green">#8032CD32</color>
+    <color name="blue">#802196F3</color>
+    <color name="blue_10">#332196F3</color>
     <color name="card_bg">#19FAA61F</color>
     <color name="rating_normal_star">#8DFAA61F</color>
 </resources>
