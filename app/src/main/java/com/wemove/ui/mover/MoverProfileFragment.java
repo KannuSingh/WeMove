@@ -44,15 +44,6 @@ public class MoverProfileFragment extends Fragment {
         binding.etName.setText(moverViewModel.getUserDetails().getValue().getFirstname());
 
 
-        binding.logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                removedLoggedInUserDetails();
-                Intent intent = new Intent(getActivity(), MainActivity.class);
-                startActivity(intent);
-                getActivity().finish();
-            }
-        });
         return binding.getRoot();
     }
     private void removedLoggedInUserDetails() {
